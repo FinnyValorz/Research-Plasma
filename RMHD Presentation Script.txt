@@ -1,0 +1,29 @@
+Notes: Fix font issue. 
+
+
+
+Intro: 
+Hello, my name is Finny Valorz. I'm an undergrad at UT Austin working under Professor Joshua Burby. My project aims to achieve a dimensional reduction of the magnetohydrodynamic (or MHD) equations in a rigorous way, so that eventually we can apply a similar process to the study of stellarators. 
+Previous authors have already reduced MHD for large aspect ratio tokamaks by considering physical properties of plasmas, but we can make this process a lot more automatic using the theory of fast-slow dynamical systems. To take advantage of this, we use the ratio of the poloidal and toroidal length scales as a small  parameter, epsilon. Then, we look for a suitable set of coordinates to use this analytical approach. 
+
+MHD: 
+So, to start with, the MHD system is a fluid model which describes a plasma's density, flow velocity, and magnetic field by combining fluid dynamics and Maxwell's equations. While most authors use the boundary conditions that both the magnetic field and the velocity are parallel to the torus's surface, we actually allow v dot n to be non-zero so that the domain can gradually change in shape. We also depart from other authors in using a scaling which accounts for larger fluctuations in the magnetic field and restricts density fluctuations to order epsilon. 
+
+Fast-Slow Split: 
+With this set-up, we search for a split where some degrees of freedom in our system evolve more quickly than others. Specifically, we would like to find a generalized slow coordinate, x, and fast coordinate, y, such that the dynamical system here in the bottom left satisfies a special condition on its derivatives. When epsilon goes to zero, the slow variables stop evolving, where this term becomes zero, and this condition lets us find a perturbative solution for the fast variables. 
+
+Scaling and New Coords: 
+Unfortunately, our current coordinates do not satisfy this condition, but that only tells us that there's some ambiguity about how quickly or slowly these physical things like density and flow speed evolve. To alleviate this, we take the poloidal, or perpendicular velocity and magnetic fields, and separate their degrees of freedom using a 2D Helmholtz decomposition. We are free to give the phi and psi fields some boundary conditions that are compatible with those of the perpendicular fields. This allows us to solve for a couple Poisson's equations to get their evolutions. 
+Based on the failure of the original system to be fast-slow, we also replace density in our system of equations with a new quantity, called Q. This is the ratio of the toroidal magnetic field to the density, whose evolution we were able to write using transport laws. 
+
+Conclusion: 
+The new evolution equations for this system are extremely complicated, but we were able to show that the limit system does in fact admit a fast-slow split. In this split, only the toroidal magnetic field and one degree of freedom from the velocity field evolve quickly, and the five remaining slow variables are all fixed in time. 
+We were also surprised to find that there's some freedom to add harmonic functions to the magnetic field, which actually results in a family of solutions to the Reduced MHD system. 
+In future work, we will find the first order corrections to this system, as well as provide a geometric interpretation of the methods used in hopes of applying them to more complicated stellarator geometries. 
+Thank you very much. 
+
+
+
+
+
+

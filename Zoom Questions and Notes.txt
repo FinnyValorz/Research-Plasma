@@ -1,0 +1,81 @@
+Projects: Ongoing projects? Students work with profs/independent? 
+   Tools: What kind of math? How much coding/langs/simulation? 
+      Me: GR, interested in dynamics. Plasma conference. 
+Typical Background: Look for math or phys applicants?
+Research Direction: Future plans? 
+Culture: Funding expectations, happy students, teaching, CoL? 
+	Students end up academia/industry? 
+Related Areas: Similar profs in department? Collaborations? 
+	Department Layout?
+Advice: Recommend other profs/schools? Other random advice?
+Don't be goofy, have a conversation. 
+
+
+
+
+
+
+
+Research: Future projects, how much math/coding? 
+Culture: Funding/teaching, happy students. 
+Related: Recommend similar profs/schools? 
+Random advice. Just have fun. 
+
+
+
+Kaptanoglu: 
+How to pronounce name, how exactly to apply for NYU/Courant. 
+GRE is enforced. Apply for phys depart. Fully paid research whole time(!? tf?) so teaching is just for fun. Math oral quals are brutal (quizzed on any random math). Much chiller in physics department though. 
+This guy is chill as hell. I wonder how his students/other professors are. 
+Data Driven modelling is the ML Burby did. Moving toward theory. 
+Some Astro/BH people in phys department. Particle phys perspective. 
+Georg Stadler, Mike O'Neal, Russ Caflisch in math
+Chris Hansen plasma at Columbia. Luka Comisso in another department. 
+MIT, Princeton have spots reserved for plasma, which helps. 
+UCLA Eduardo Paulo Alves ML, Numerics, Kinetics 
+UC Irvine Energetic Particle Phys. William Heidbrink. 
+Auburn does have strong group. 
+UCSD Mech/Aero Engineering. Boris Kramer. 
+U Wash plasma in Aerospace. Qing Wayhu(?) in Applied. Did he mean Qian Hong? 
+
+
+
+
+
+
+
+
+Rogerio: 
+Three different departments, separate applications? (Theory, Experiment, Space I think, different colleges). 
+Near-axis (Max). Probably some coding. 
+Transition between kinetic/fluid models. 
+Meets with every student weekly?? tf?
+Big red ball, mirror experiments. Group meetings are together, so theory knows some experiment. 
+Grad students mentor undergrads in research, that sounds very cool and fun. 
+Remembered me from APS. "Have >700 apps/year, but you sound very qualified, so I hope you will come visit and join us."
+Talked about guitar. 
+*Sounds like a great program. I should have asked how much math I'll get to do. 
+
+
+
+TJ Klotz: 
+Moved from geometry to analysis. ADC flow Beltrami field
+Uses simulation to help guide thinking before conjectures and proofs. 
+Lots and lots of related projects in applied math. Separate from pure math. 
+Some of the happiest grad students he's seen are at Boulder. 
+
+
+
+
+Landreman: 
+Theory group is him and Ian Abel. Someone else does ns and bhs. 
+Two 4th years leaving by the time I start research there. Ian has students graduating as well. 
+Looks good to be familiar with GitHub and command line. Group codes a lot. 
+Don't need to be enrolled in a class to learn. Go teach myself a skill. 
+Not as much collaboration as he would like with other schools. 
+Self-force on coils, turbulence and heating/transport, optimization/symmetry. Room for new ideas in designing fields in SOL. 
+Applied math: Courant (Kaptanoglu), Cornell (Bindel), Boulder (Meiss)
+Stellarator Theory: Columbia, Princeton, Madison
+
+
+

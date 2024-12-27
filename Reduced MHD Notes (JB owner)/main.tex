@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[backend=biber,style=phys]{biblatex}
 \addbibresource{references.bib}
-\usepackage{gensymb,amsmath,amsthm,amssymb,amsfonts, mathtools, braket, cancel, bm, xcolor}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, mathtools, braket, cancel, bm, xcolor}
 \usepackage[margin=1in]{geometry}
 
 \newtheorem{theorem}{Theorem}
@@ -915,7 +915,7 @@ This has the same non-trivial kernel as before, so it is not injective. However,
 \end{align}
 
 
-\subsection{Low-$\beta$ Scaling} \label{lowflow}
+\subsection{Low-$\beta$ Scaling} \label{lowbeta}
 In low-$\beta$ scaling ($M_0^2 = 1, \beta_0 = \ep^2$), the limit system is identical to that in high-$\beta$ scaling, and we find that the split $x=(\psi, \nu_\para, \Phi, \Psi, q)$ and $y=(\phi, \beta_\para)$ is weakly fast-slow in exactly the same way. 
 
 
@@ -1184,7 +1184,7 @@ In other words, the Fr\'echet derivative of a function $f$ is the best linear ap
 
 which returns a linear operator at each point. Furthermore, if a function is Fr\'echet differentiable, we may compute it using the gateaux or directional derivative;
 
-\begin{equation} \label{frechet}
+\begin{equation} 
     Df(u)[h] = \left. \frac{d}{d\ep} \right|_0 f(u+\ep h). 
 \end{equation}
 

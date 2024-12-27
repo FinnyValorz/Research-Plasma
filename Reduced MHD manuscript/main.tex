@@ -1,0 +1,132 @@
+\documentclass{article}
+\usepackage[backend=biber,style=phys]{biblatex}
+\addbibresource{references.bib}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, mathtools, braket, cancel, bm, xcolor}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\newcommand{\para}{\parallel}
+\newcommand{\lam}{\lambda}
+\newcommand{\om}{\omega}
+\newcommand{\gam}{\gamma}
+\newcommand{\ep}{\epsilon}
+\newcommand{\np}{\nabla_\perp}
+\newcommand{\apo}{\ ^{\prime} \!}
+\newcommand{\p}{\partial}
+\newcommand{\ext}{\mathop{}\!\mathrm{d}}
+\newcommand{\til}[1]{\widetilde{ #1 }}
+\newcommand{\deriv}[2]{\frac{\p #1}{\p #2}}
+\newcommand{\st}{\sin\theta}
+\newcommand{\ct}{\cos\theta}
+\newcommand{\sphi}{\sin\phi}
+\newcommand{\cphi}{\cos\phi}
+\newcommand{\fr}{\frac{1+\ep q}{1+\ep\beta_\para}}
+\newcommand{\frinv}{\frac{1+\ep\beta_\para}{1+\ep q}}
+
+\newcommand{\pth} [1] {\left( #1 \right) }
+\newcommand{\br} [1] {\left[ #1 \right] }
+\newcommand{\bmat} [1] {\begin{bmatrix} #1 \end{bmatrix}}
+\newcommand{\pmat} [1] {\begin{pmatrix} #1 \end{pmatrix}}
+
+
+
+
+\title{Reduced MHD Manuscript}
+\author{Finny Valorz}
+\date{June 2024}
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+    
+\end{abstract}
+
+1: MHD Eqns. 2: Split para/perp. Alg from two. 3: My nd process. 4: Improving Strauss nd process. 5: Fast-Slow Attempt. 6: 2D Decomps and q. 7: Take 4 and change vars. 8: New wFSS. Appendix: Lemmas and Identities. 
+
+\section{MHD Equations of Motion} 
+The magnetohydrodynamic (MHD) equations describe the time evolution of a charged fluid's mass density $\rho$, velocity $\bm{v}$, and magnetic field $\bm{B}$ in some spatial domain $Q\subset \mathbb{R}^3$. In this analysis, we fix $Q=D\times S$, the solid 2-torus. We choose poloidal coordinates $x,y\in D$ on the cross-sectional disks, and toroidal coordinate $z \in S$. The poloidal diameter $a$ and outer toroidal circumference $L$ provide characteristic length scales for our system's dynamics. 
+
+In addition to a solenoidal condition, $\nabla\cdot \bm{B}=0$, our system consists of a continuity equation \eqref{continuity}, momentum conservation \eqref{momentum}, and Faraday's law \eqref{faraday}:
+
+\begin{align}
+    \deriv{\rho}{t} &= -\nabla\cdot \pth{\rho \bm{v}} \label{continuity} \\ 
+    \rho\deriv{\bm{v}}{t} &= \mu_0^{-1} \pth{\nabla\times \bm{B}} \times \bm{B} - \nabla p(\rho) - \rho \bm{v}\cdot\nabla \bm{v} \label{momentum} \\ 
+    \deriv{\bm{B}}{t} &= \nabla \times \pth{\bm{v}\times \bm{B}}. \label{faraday}
+\end{align}
+
+\begin{align*}
+    \frac{\partial\rho}{\partial t} &= -\nabla\cdot (\rho \bm{v}) \\ 
+    \rho \frac{\partial \bm{v}}{\partial t} &= \mu_0^{-1} (\nabla\times\bm{B})\times\bm{B} - \nabla p(\rho) 
+\end{align*}
+
+We assume that the pressure $p=p(\rho)$ is a function only of density. Standard boundary conditions for this system of equations are
+\begin{align*} 
+    \bm{B}\cdot \bm{n} = 0 \quad \text{ and }\quad  \bm{v}\cdot \bm{n} = 0 \quad \text{ on }\quad \p Q,
+\end{align*}
+where $\bm{n}$ denotes the outward pointing unit normal on the surface $\p Q$. 
+
+
+
+\section{Nondimensionalization and Ordering} 
+The dependent variables in our system of PDEs are highly coupled to one another. We will give a formal description of these relationships by nondimensionalizing our MHD model and comparing the dimensionless parameters that remain. These parameters will define an ordering/perturbative expansion, an observation timescale, and will characterize different dynamical regimes. 
+
+Because our domain factorizes, it is convenient to nondimensionalize our coordinates according to their characteristic length scales: 
+\begin{align*}
+    x=aX,\quad y=aY,\quad z=\frac{L}{2\pi}Z.
+\end{align*}
+This induces a separation between derivatives in the poloidal and toroidal directions, $\nabla = \frac{1}{a}\np + \frac{2\pi}{L}\bm{e}_Z\p_Z$, where $\np = \pth{\p_X, \p_Y, 0}$. For example, the divergence condition becomes   
+\begin{align*}
+    \nabla\cdot\bm{B} = \frac{1}{a}\np\cdot\bm{B}_\perp + \frac{2\pi}{L}\p_ZB_Z = 0. 
+\end{align*}
+
+Many plasma experiments take place on large aspect-ratio toroidal domains, where the ratio $\ep = 2\pi a/L$ is small. In such experiments, the magnetic field is usually much stronger in the toroidal than the poloidal directions, and the variations are small. This behavior motivates us to choose an ordering that splits $\bm{B}$ accordingly: 
+\begin{align*}
+    \rho &= \rho_0 r \\
+    \bm{v} &= v_0 \bm{\nu} \\ 
+    \bm{B} &= B_0 \pmat{\ep\beta_x \\ \ep\beta_y \\ 1+\ep^2\beta_\para}. 
+\end{align*}
+
+****
+
+The only quantities in our system that still have units are time and pressure. We choose $p=p_0\pi(r)$, where , we are able to identify the following parameters as they appear in our nondimensionalized MHD system:  
+\begin{align*}
+    \frac{t_0 v_0}{a} = 1, \qquad 
+    \frac{p_0}{\mu_0^{-1}B_0^2} = \beta_0, \qquad 
+    \frac{\rho_0\,v_0^2}{\mu_0^{-1}B_0^2} = M_0^2\beta_0. 
+\end{align*}
+The first of these parameters establishes a particular observation timescale, where we are zoomed in on dynamics in the poloidal plane. The second and third define the plasma-beta parameter, $\beta_0$, and the Mach number, $M_0$. respectively. Different orderings of these quantities in $\ep$ correspond to different regimes, where plasma behavior is characteristically different. 
+
+\subsection{Rescaled Continuity Equation}
+\begin{align*}
+    \frac{\rho_0}{t_0}\deriv{r}{\tau} &= -\frac{\rho_0v_0}{a}\np\cdot\pth{r\bm{\nu}_\perp} - \frac{2\pi\rho_0v_0}{L} \p_Z\pth{r\nu_\para}
+\end{align*}
+or 
+
+\subsection{Rescaled Momentum Conservation}
+
+\subsection{Rescaled Faraday Induction}
+\begin{align*} 
+\deriv{B_z}{t} &= 
+    \pth{B_\perp\cdot\np + B_z\p_z}v_z - \br{(v_\perp\cdot\np + v_z\p_z) + (\np\cdot v_\perp + \p_zv_z)} B_z \\
+    &= B_\perp\cdot\np v_z - v_\perp\cdot\np B_z - v_z\p_zB_z - \np \cdot v_\perp B_z 
+\end{align*}
+
+
+
+\section{Improving Strauss's Scaling}
+$\rho$ motivation: change $r$ because fluctuations in $\rho$, $\p_\tau \rho$ should be order $\ep$, not order 1. Earlier scaling overestimated importance of $r$ in evolution, which was not physical. This is the proper way of incorporating order $\ep$ changes, because higher order terms go away in limit. 
+
+B motivation: $\beta_\para$ fluctuates more than we originally put. 
+\begin{align*}
+    \rho &= \rho_0\,(1 + \epsilon\,r)\\
+    \bm{v} & = v_0\,\bm{\nu} = v_0 \pmat{} \\
+    \bm{B} & = B_0\bigg((1 + \epsilon\,\beta_\parallel)\bm{e}_z + \epsilon\,\bm{\beta}_\perp\bigg) = B_0 \pmat{\ep\beta_x \\ \ep\beta_y \\ 1+\ep\beta_\para} .
+\end{align*}
+
+\end{document}

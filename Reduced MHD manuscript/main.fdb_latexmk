@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber main"] 1735336791.64384 "main.bcf" "main.bbl" "main" 1735341504.0733 0
-  "main.bcf" 1735341503 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
+["biber main"] 1735342355.53342 "main.bcf" "main.bbl" "main" 1735342362.63789 0
+  "main.bcf" 1735342361 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1735341501.87011 "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD manuscript/main.tex" "main.pdf" "main" 1735341504.07447 0
+["pdflatex"] 1735342360.47891 "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD manuscript/main.tex" "main.pdf" "main" 1735342362.63895 0
   "C:/Users/finny/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1734661928 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/finny/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1734661889 11988995 2335b61cda65250248dffdc31f3e4ab0 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1233951848 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -119,11 +119,11 @@
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1730400552 10214 61188260d324e94bc2f66825d7d3fdf4 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD manuscript/main.tex" 1735341501 6641 f08194d88c225ef4671c8073058547fb ""
-  "main.aux" 1735341503 993 4a847c7fbc82a89d2ca08b85914dd40a "pdflatex"
-  "main.bbl" 1735336840 486 76d65a242ec496c9b4361af646ff12cb "biber main"
-  "main.run.xml" 1735341503 2430 b29f292c3d282b44810cacf5f1fb7029 "pdflatex"
-  "main.tex" 1735341501 6641 f08194d88c225ef4671c8073058547fb ""
+  "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD manuscript/main.tex" 1735342352 6645 a699f61a68f964240932a5e558e8a04d ""
+  "main.aux" 1735342361 993 4a847c7fbc82a89d2ca08b85914dd40a "pdflatex"
+  "main.bbl" 1735342358 486 76d65a242ec496c9b4361af646ff12cb "biber main"
+  "main.run.xml" 1735342361 2430 b29f292c3d282b44810cacf5f1fb7029 "pdflatex"
+  "main.tex" 1735342352 6645 a699f61a68f964240932a5e558e8a04d ""
   (generated)
   "main.aux"
   "main.bcf"

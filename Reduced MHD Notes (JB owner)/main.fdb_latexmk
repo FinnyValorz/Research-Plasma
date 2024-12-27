@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber main"] 1735335026.05201 "main.bcf" "main.bbl" "main" 1735341627.9671 0
-  "main.bcf" 1735341627 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
+["biber main"] 1735342330.1617 "main.bcf" "main.bbl" "main" 1735342338.28807 0
+  "main.bcf" 1735342337 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1735341625.48791 "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD Notes (JB owner)/main.tex" "main.pdf" "main" 1735341627.96823 0
+["pdflatex"] 1735342335.60469 "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD Notes (JB owner)/main.tex" "main.pdf" "main" 1735342338.28929 0
   "C:/Users/finny/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1734661928 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/finny/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1734661889 11988995 2335b61cda65250248dffdc31f3e4ab0 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1233951848 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -131,11 +131,11 @@
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1730400552 10214 61188260d324e94bc2f66825d7d3fdf4 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD Notes (JB owner)/main.tex" 1735341621 117355 134888ffacc15ae41b91f007e553d405 ""
-  "main.aux" 1735341627 8323 1f443909b1bfe5542a58b45de831fb6e "pdflatex"
-  "main.bbl" 1735335033 486 76d65a242ec496c9b4361af646ff12cb "biber main"
-  "main.run.xml" 1735341627 2430 b29f292c3d282b44810cacf5f1fb7029 "pdflatex"
-  "main.tex" 1735341621 117355 134888ffacc15ae41b91f007e553d405 ""
+  "c:/Users/finny/Documents/GitHub/Research-Plasma/Reduced MHD Notes (JB owner)/main.tex" 1735342326 117361 6cdeb7e452e20835045e3a555e317fc1 ""
+  "main.aux" 1735342337 8323 1f443909b1bfe5542a58b45de831fb6e "pdflatex"
+  "main.bbl" 1735342332 486 76d65a242ec496c9b4361af646ff12cb "biber main"
+  "main.run.xml" 1735342337 2430 b29f292c3d282b44810cacf5f1fb7029 "pdflatex"
+  "main.tex" 1735342326 117361 6cdeb7e452e20835045e3a555e317fc1 ""
   (generated)
   "main.aux"
   "main.bcf"

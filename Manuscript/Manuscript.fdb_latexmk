@@ -1,11 +1,12 @@
 # Fdb version 4
-["biber Manuscript"] 1735342459.73927 "Manuscript.bcf" "Manuscript.bbl" "Manuscript" 1735343786.96261 0
-  "Manuscript.bcf" 1735343786 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
+["biber Manuscript"] 0 "Manuscript.bcf" "Manuscript.bbl" "Manuscript" 1735454730.18512 -1
+  "C:/Users/finny/AppData/Local/Programs/MiKTeX/bibtex/bib/feupphdteses/references.bib" 1366811700 2206 985e03fb36d872d306e76cfacc160693 ""
+  "Manuscript.bcf" 1735454729 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
   (generated)
   "Manuscript.bbl"
   "Manuscript.blg"
   (rewritten before read)
-["pdflatex"] 1735343784.91476 "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" "Manuscript.pdf" "Manuscript" 1735343786.96385 0
+["pdflatex"] 1735454728.2061 "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" "Manuscript.pdf" "Manuscript" 1735454730.18674 0
   "C:/Users/finny/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1734661928 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/finny/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1734661889 11988995 2335b61cda65250248dffdc31f3e4ab0 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1233951848 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -51,6 +52,7 @@
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
+  "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1247596667 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 7fee39e011c23b3589931effd97b9702 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1247596666 32716 08e384dc442464e7285e891af9f45947 ""
@@ -116,11 +118,11 @@
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1730400552 10214 61188260d324e94bc2f66825d7d3fdf4 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Manuscript.aux" 1735343786 993 f1abcd9e94a52a90de8e9debcc79ccda "pdflatex"
-  "Manuscript.bbl" 1735342463 486 76d65a242ec496c9b4361af646ff12cb "biber Manuscript"
-  "Manuscript.run.xml" 1735343786 2472 c8ce6cec3fc1898b5a0cc2ca3f7bab94 "pdflatex"
-  "Manuscript.tex" 1735343784 6404 2651d4674ce452f2d28c1ffea17a6fb3 ""
-  "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" 1735343784 6404 2651d4674ce452f2d28c1ffea17a6fb3 ""
+  "Manuscript.aux" 1735454729 967 bab520ab6060ff540e6f2fe70bc6011b "pdflatex"
+  "Manuscript.bbl" 1735442343 486 76d65a242ec496c9b4361af646ff12cb "biber Manuscript"
+  "Manuscript.run.xml" 1735454729 2472 c8ce6cec3fc1898b5a0cc2ca3f7bab94 "pdflatex"
+  "Manuscript.tex" 1735454727 9464 ab42cc57fe2646e3409ecdbcf0bfebcf ""
+  "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" 1735454727 9464 ab42cc57fe2646e3409ecdbcf0bfebcf ""
   (generated)
   "Manuscript.aux"
   "Manuscript.bcf"

@@ -83,7 +83,15 @@ Many plasma experiments take place on large aspect-ratio toroidal domains, where
     \bm{v} &= v_0 \bm{\nu} \\ 
     \bm{B} &= B_0 \pmat{\ep\beta_x \\ \ep\beta_y \\ 1+\ep\beta_\para},
 \end{align*}
-with $r, \bm{\nu}, \beta_x, \beta_y,$ and $\beta_\para$ all $O\pth{1}$ in $\ep$. The constant coefficients $\rho_0, v_0,$ and $B_0$ represent values typical of a given experiment, which can be relatiely small or large. Time and pressure will be treated similarly, so that $t=t_0\tau$ and $p=p_0\pi(r)$ with $\tau,\pi(r) = O(1)$. 
+with $r, \bm{\nu}, \beta_x, \beta_y,$ and $\beta_\para$ all $O\pth{1}$ in $\ep$. The constant coefficients $\rho_0, v_0,$ and $B_0$ represent values typical of a given experiment, which can be relatiely small or large. Time and pressure will be treated similarly, so that $t=t_0\tau$ and $p=p_0\pi(r)$ with $\tau,\pi(r) = O(1)$.
+
+{\color{red} I should write it this way: 
+\begin{align*}
+    \rho &= \rho_0 \pth{1+\ep r} \\
+    \bm{v} &= v_0 \bm{\nu} = v_0 \pmat{\nu_X \\ \nu_Y \\ \nu_Z} = v_0 \pmat{\bm{\nu}_\perp \\ \nu_Z} \\ 
+    \bm{B} &= B_0 \bm{\beta} = B_0 \pmat{\ep\beta_X \\ \ep\beta_Y \\ 1+\ep\beta_\para} = B_0 \pmat{\ep\bm{\beta}_\perp \\ \beta_Z},
+\end{align*}
+Why do I have $\nu_\para$ instead of $\nu_Z$? Why does $\bm{\beta}_\perp$ not include the $\ep$?}
 
 This scaling is similar to one taken by Strauss in 1975. In his scaling however, toroidal magnetic field fluctuations are assumed to be $O\pth{\ep^2}$, restricting the kinds of scenarios where this process can be applied. Despite density fluctuations being small for small $\ep$, he also allows variations at $O(1)$, so that 
 \begin{align*}
@@ -141,16 +149,19 @@ Note! $\beta_\perp\cdot\p_Z\beta_\perp = \frac{1}{2}\p_Z|\beta_\perp|^2$. Which 
     &= \ep^2 B_0^2 \pth{\np\times\bm{\beta}_\perp}\times\bm{\beta}_\perp + B_0^2 \pth{1+\ep\beta_\para} \pth{\ep^2\p_Z\bm{\beta}_\perp - \ep\np\beta_\para}. 
 \end{align*}
 
-The pressure term gives 
+The second and third terms are just   
 \begin{align*}
-    \nabla p\pth{\rho} &= \frac{p_0}{a}\np\pi\pth{1+\ep r} + \bm{e}_Z \frac{2\pi p_0}{L}\p_Z\pi.
+    a\nabla p &= p_0\pth{\np\pi + \ep\bm{e}_Z\p_Z\pi}, \quad\text{and} \\ 
+    \rho\bm{v}\cdot a\nabla\bm{v} &= \rho_0v_0^2 \pth{1+\ep r} \pth{\bm{\nu}_\perp\cdot\np\bm{\nu} + \ep\nu_\para\p_Z\bm{\nu}}. 
 \end{align*}
-
+Altogether, removing a factor of $\pth{1+\ep r} \rho_0v_0/t_0$ from both sides, we have evolution equations for the dimensionless velocity fields $\nu_\para$ and $\bm{\nu}_\perp$:  
 \begin{align*}
-    \frac{a}{t_0v_0}\frac{\rho_0v_0^2}{\mu_0^{-1}B_0^2} \pth{1+\ep r} \deriv{\bm{\nu}}{\tau} = M_0^2\beta_0 \pth{1+\ep r} \deriv{\bm{\nu}}{\tau} &= \frac{1}{B_0^2} \pth{a\nabla\times\bm{B}}\times\bm{B} - \beta_0 a\nabla\pi - M_0^2\beta_0 \bm{\nu}\cdot a\nabla\bm{\nu}. 
+    \pth{1+\ep r} \deriv{\nu_\para}{\tau} &= \ep^2 \frac{t_0v_0}{a} \frac{\mu_0^{-1} B_0^2}{\rho_0v_0^2} \pth{\bm{\beta}_\perp\cdot\np\beta_\para + \bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp} - \ep\frac{t_0v_0}{a}\frac{p_0}{\rho_0v_0^2} \p_Z\pi - \frac{t_0v_0}{a} \pth{1+\ep r} \pth{\bm{\nu}_\perp \cdot \np\nu_\para + \ep \nu_\para\p_Z\nu_\para} \\ 
+    &= \ep^2\frac{1}{M_0^2\beta_0} \pth{\bm{\beta}_\perp\cdot\np\beta_\para + \ep\bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp} - \ep \frac{1}{M_0^2\beta_0} \beta_0\p_Z\pi - \pth{1+\ep r} \pth{\bm{\nu}_\perp\cdot\np\nu_\para + \ep \nu_\para\p_Z\nu_\para}. 
 \end{align*}
-where we've multiplied through by $a/\mu_0^{-1}B_0^2$ to make use of orderings. $a\nabla = \np + \ep\bm{e}_Z\p_Z$ makes things easier too. 
-
+\begin{align*}
+    \deriv{\bm{\nu}_\perp}{\tau} &= 
+\end{align*}
 
 
 \subsection{Faraday Induction}

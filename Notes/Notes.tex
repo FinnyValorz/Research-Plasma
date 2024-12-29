@@ -116,7 +116,7 @@ The components of this expression look like $B_i\p_iB_j - B_j\p_iB_j$ for $i,j\i
     [(\nabla\times B)\times B]_z &= B\cdot\nabla B_z - (\p_zB)\cdot B \\
     &= (B_\perp\cdot\np B_z + B_z\p_zB_z) - (B_\perp\cdot \p_zB_\perp + B_z\p_zB_z) \\
     &= B_\perp\cdot(\np B_z - \p_zB_\perp) \\ 
-    &= \pth{\frac{B_1 \til{B}_0}{a}} \pth{\beta_\perp \cdot \til{\nabla}_\perp\beta_\perp} - \pth{\frac{2\pi B_1^2}{L}} \pth{\p_Z\beta_\perp}. 
+    &= \pth{\frac{B_1 \til{B}_0}{a}} \pth{\beta_\perp \cdot \til{\nabla}_\perp\beta_\perp} - \pth{\frac{2\pi B_1^2}{L}} \pth{\p_Z\beta_\perp} (wrong). 
 \end{split} \end{equation}
 
 \begin{equation} \begin{split}
@@ -178,7 +178,7 @@ Express the mass density $\rho$, fluid velocity $\bm{v}$, and magnetic field $\b
     \bm{v} & = v_0\,\bm{\nu}\\
     \bm{B} & = B_0\bigg((1 + \ep\beta_\para)\bm{e}_z + \ep\bm{\beta}_\perp\bigg) = B_0 \pmat{\ep\beta_x \\ \ep\beta_y \\ 1+\ep\beta_\para} .
 \end{align*}
-Note that the non-constant part of the parallel magnetic field is larger than in Strauss' convention by a single power of $\epsilon$. Also note that the decomposition of density entails assuming small density fluctuations. (That is, to get this system from the previous system, we have only set $\til{B}_0 = B_1 = \ep B_0$ and taken $r\rightarrow (1+\ep r)$. The notation below uses $\np = (\p_X, \p_Y, 0)$). 
+Note that the non-constant part of the parallel magnetic field is larger than in Strauss' convention by a single power of $\epsilon$. Also note that the decomposition of density entails assuming small density fluctuations. (That is, to get this system from the previous system, we only have to set $\til{B}_0 = B_1 = \ep B_0$ and take $r\rightarrow (1+\ep r)$. The notation below uses $\np = (\p_X, \p_Y, 0)$). 
 
 Pressure is now $p=P_0P(1+\ep r)$, whose expansion about $1$ will be helpful: 
 \begin{align*}
@@ -782,7 +782,7 @@ There are no explicit $O(1)$ contributions. Considering cancellations between di
 At $O\pth{\ep^2}$, we have 
 \begin{align*}
     \ep S_0 &: -\ep^2\nu_\para \p_Z\nu_\para \\ 
-    \ep S_1 &: - \frac{1}{2}\ep^2\p_Z |\np\psi|^2 \\ 
+    \ep S_1 &: - \frac{1}{2}\ep^2\p_Z |\np\psi|^2 = -\ep^2\np\psi \cdot \p_Z\np\psi = -\ep^2 \Braket{\psi, \p_Z\psi} \\ 
     \ep S_2 &: - \ep^2\Braket{\beta_\para, \GN\p_Z\beta_\para} - \ep^2q\br{\beta_\para, \Psi} + \ep^2\beta_\para \br{\beta_\para, \Psi}
 \end{align*}
 

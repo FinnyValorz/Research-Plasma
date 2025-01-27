@@ -40,7 +40,7 @@
 
 \title{Reduced MHD Notes}
 \author{Finny Valorz}
-\date{June 2024}
+%\date{June 2024}
 \begin{document}
 \maketitle
 
@@ -285,15 +285,17 @@ After rescaling time according to $\tau = \epsilon\,T$, where $T$ denotes the fa
 \end{align*}
 while the limiting slow-variable evolution equations are $\partial_T\nu_\parallel = 0$, $\partial_T\bm{\beta}_\perp = 0$. This choice of dependent variables does not comprise a fast-slow split because, for each fixed value of the slow variable $x$, the fixed points for the fast variable evolution equations are not isolated. This suggests there are hidden slow variables among these fast variables.
 
-More explicitly, we observe that $D_yf_0(x,y)$ is not invertible, failing to satisfy the constraint \eqref{constraint}. 
+More explicitly, we observe that $D_yf_0(x,y)$ is not invertible, failing to satisfy the constraint \eqref{constraint}:
 \begin{equation} \begin{split}
     D_yf_0(x,y) [\delta y] = \pth{\deriv{f_0^j}{y^i} \br{\delta y^i}} 
     &= \pmat{\deriv{}{r}f_0^r & \deriv{}{\bm{\nu}_\perp}f_0^r & \deriv{}{\beta_\para}f_0^r\\ \deriv{}{r}f_0^{\bm{\nu}_\perp} & \ddots & \vdots \\ \deriv{}{r}f_0^{\beta_\para} & \cdots & \deriv{}{\beta_\para}f_0^{\beta_\para}} 
     \bmat{\delta r \\ \delta \bm{\nu}_\perp \\ \delta \beta_\para} \\
     &= \pmat{0 & -\np \cdot & 0 \\ 0 & 0 & -\np \\ 0 & -\np \cdot & 0} 
     \bmat{\delta r \\ \delta \bm{\nu}_\perp \\ \delta \beta_\para}
-    = \pmat{-\np \cdot \delta \bm{\nu}_\perp \\ -\np \delta \beta_\para \\ -\np \cdot \delta \bm{\nu}_\perp }
+    = \pmat{-\np \cdot \delta \bm{\nu}_\perp \\ -\np \delta \beta_\para \\ -\np \cdot \delta \bm{\nu}_\perp }.
 \end{split} \end{equation}
+Example: $\deriv{f_0}{\bm{\nu}_\perp}[\delta\bm{\nu}_\perp] = \delta f_0 = \deriv{f_0}{\bm{\nu}_\perp}\cdot \delta\bm{\nu}_\perp = f_0(\bm{\nu}_\perp+ \delta\bm{\nu}_\perp) - f_0(\bm{\nu}_\perp) = \np\cdot \delta\bm{\nu}_\perp$. Also, $\frac{d}{d\ep}\np\cdot\pth{\bm{\nu}_\perp+\ep\delta\bm{\nu}_\perp} = \np\cdot\delta\bm{\nu}_\perp$.
+
 Remember that partial derivatives are treated as in \eqref{partial} as $\p f_0^j/\p y^i \br{\delta y^i} = D_{y^i} f_0^j \br{\delta y^i}$. Regardless of the non-zero entries, this block-matrix has a column of zeroes, so its determinant is $0$ and it is non-invertible. {\color{red}It is probably best to avoid the notion of determinant of an operator between infinite-dimensional spaces. Invertibility is a dimension-independent notion, but determinant is not. --JB} Intuitively, a fast-slow system ought to change on the fast timescale with a change in one of its fast variables. The system above is degenerate in the fast variable $r$, which suggests there are hidden slow variables among these fast variables. 
 
 
@@ -589,7 +591,7 @@ We use similar techniques to find $\Phi$ and $\Psi$ as we did for $\phi$ and $\p
         &+ \ep\p_Z\beta_\para\np^2\phi + \pth{1+\ep\beta_\para}\np^2\p_Z\phi - \ep\Braket{\p_Z\nu_\para, \Phi} - \ep\Braket{\nu_\para, \p_Z\Phi} \nonumber\\ 
         &+ \ep\br{\p_Z\nu_\para, \Psi} + \ep\br{\nu_\para, \p_Z\Psi} - \ep\p_Z\nu_\para\np^2\Phi - \ep\nu_\para\np^2\p_Z\Phi. \text{\color{green}CHECKED} 
 \end{align}
-Note the second term in the equation of motion disappears because it involves the divergence of a curl. 
+Note the second term in the equation of motion disappears because it involves the curl of a gradient. 
 
 This agrees with $\nabla\cdot\bm{B}=0$. 
 
@@ -763,7 +765,7 @@ Nothing strictly at $O(1)$. At $O(\ep)$,
 \begin{align*}
     \ep S_0 &= -\ep^2\nu_\para \p_Z\nu_\para - \ep\Braket{\nu_\para, \phi} + \ep\br{\nu_\para, \psi}, \\ 
     \ep  S_1 &= -\beta_0\fr\p_Z\pi\pth{\frinv} - \cancel{\ep\p_Z\beta_\para} - \cancel{\ep^2q\p_Z\beta_\para} + \cancel{\ep^2\beta_\para\p_Z\beta_\para} \\ 
-        &- \cancel{\ep^2\beta_\para\p_Z\beta_\para} - \frac{1}{2}\ep^2\p_Z |\np\psi|^2 + O\pth{\ep^3}, \\ 
+        &- \cancel{\ep^2\beta_\para\p_Z\beta_\para} - \frac{1}{2}\ep^2\p_Z |\np\Psi|^2 + O\pth{\ep^3}, \\ 
     \ep S_2 &= \cancel{\ep\p_Z\beta_\para} + \cancel{\ep^2 q\p_Z\beta_\para} - \ep^2\Braket{\beta_\para, \GN\p_Z\beta_\para} \\ 
         &- \ep\br{\beta_\para, \Psi} - \ep^2q\br{\beta_\para, \Psi} + \ep^2\beta_\para \br{\beta_\para, \Psi} + O\pth{\ep^3}. 
 \end{align*}
@@ -782,7 +784,7 @@ There are no explicit $O(1)$ contributions. Considering cancellations between di
 At $O\pth{\ep^2}$, we have 
 \begin{align*}
     \ep S_0 &: -\ep^2\nu_\para \p_Z\nu_\para \\ 
-    \ep S_1 &: - \frac{1}{2}\ep^2\p_Z |\np\psi|^2 = -\ep^2\np\psi \cdot \p_Z\np\psi = -\ep^2 \Braket{\psi, \p_Z\psi} \\ 
+    \ep S_1 &: - \frac{1}{2}\ep^2\p_Z |\np\Psi|^2 = -\ep^2\np\Psi \cdot \p_Z\np\Psi = -\ep^2 \Braket{\Psi, \p_Z\Psi} \\ 
     \ep S_2 &: - \ep^2\Braket{\beta_\para, \GN\p_Z\beta_\para} - \ep^2q\br{\beta_\para, \Psi} + \ep^2\beta_\para \br{\beta_\para, \Psi}
 \end{align*}
 
@@ -1450,8 +1452,6 @@ Reduction scheme in Fitzpatrick book looks like just assuming $\nabla\cdot v =0$
 
 Michael suggested there is a chain/co-chain complex in my system. $\bm{\nu}_\perp$ depends only on $\phi$ and $\psi$, which can be expressed as $d\Omega$ and $d^*\Omega$ of a single two-form, $\Omega\pth{\phi,\psi,\nu_\para} = $something. 
 
-Should I do $p=p_0\pi(r)$? This conflicts with $\ep=2\pi a/L$. Should use $\bm{e}_Z$ instead of $\bm{e}_z$ once I've nondimensionalized. Should also replace $\np^2$ with $\Delta$. 
-
 Proposal: What do we need the $2\pi$ for when defining $Z$? Why don't we either 1) get rid of it, so that the nd coords all go 0 to 1 (before repeating for Z), or 2) call it $\theta$ instead of $Z$ to make it clear that it is the $2\pi$-periodic angle. 
 
 Motivation for nd, ordering, scalings: Identifying a fast-slow system REQUIRES a physical system to be made dimensionless and ordered. Choosing a scaling is how we implement this physically/so that model continues to agree with experiment. When we mathematically assume that nd vars are order 1, we have to re-correct our model by including eps. (For us, this means our scaling should make a perp/para separation explicit). 
@@ -1463,8 +1463,6 @@ When ep small, we see small variations in B. When ep=1 (geometric limit), we get
 
 Should I define fss earlier in paper or later? This changes whether I write 3 with condensed or expanded equations. Do I want reader to know ``I'm showing that MHD is wfss," or that ``MHD has this cool dimensional reduction, which I achieve using wfss." 
 
-Can I just split the pressures like $P'(\fr) = P'(1) + \cdots$ 
-
 Assume solutions are all smooth $C^\infty$ in time/``regular." Then eg. deriv of $v\cdot n=v_\perp\cdot n=0$ is $\p_t v\cdot n=0$ which is technically another boundary condition (we have an expression for $\p_t v=$, but no reason to believe a priori that it is $=0$, so this is assumed). This is required when I try to pull $\lap$ off of $\lap\p_t\phi = \np\cdot\p_tv_\perp$. Lemma 1 says existence of solutions to this Poisson equation $\lap f=s$ require $\iint_D s\ dxdy=0 = \oint_{\p D} n\cdot\np f\ dl =0$. In this case, solutions require $\iint_D \np\cdot\p_t v_\perp\ dxdy = \oint_{\p D} (\p_tv_\perp \cdot n)\ dl =0$, which holds if $v\in C^\infty$ so that we can take $\p_t (v_\perp \cdot n) = 0$. 
 
 Wait but if $v_\perp=\np\phi + e_z\times\np\psi$, we actually have $\oint (\p_tv_\perp - e_z\times\np\psi) \cdot n\ dl =0$. First bit is already implied, so this means we need $\oint_{\p D} (e_z\times\np\psi)\cdot\ n\ dl= e_z\cdot \oint_{\p D} (\np\psi\times n)\ dl =0$. 
@@ -1473,8 +1471,7 @@ Lemma 1 should have $\oint$.
 
 To complete wfss proof, just show that we can take a particular $\delta\beta_\para^p\in\mathcal{N}$ and generalize the solution by adding on other bits which kick $\delta\beta_\para$ out of $\mathcal{N}$. 
 
-Oh shit why is $|\nu_\perp|^2 = |\np\phi|^2 + |\np\psi|^2$? I should get $+2\br{\psi,\phi}$
+I should make $t_0v_0/a=\ep$ from the get-go so that I don't have so many different time variables floating around. 
 
-I need to just write out the limit systems in their entirety. Probably need to just include pressure expansions. 
 
 \end{document}

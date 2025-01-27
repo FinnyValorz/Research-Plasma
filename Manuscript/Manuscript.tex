@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[backend=biber,style=phys]{biblatex}
 \addbibresource{references.bib}
-\usepackage{amsmath,amsthm,amssymb,amsfonts, mathtools, braket, cancel, bm, xcolor}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, mathtools, braket, cancel, bm, xcolor, verbatim}
 \usepackage[margin=1in]{geometry}
 
 \newtheorem{theorem}{Theorem}
@@ -16,7 +16,7 @@
 \newcommand{\gam}{\gamma}
 \newcommand{\ep}{\epsilon}
 \newcommand{\np}{\nabla_\perp}
-\newcommand{\apo}{\ ^{\prime} \!}
+\newcommand{\lap}{\Delta_\perp}
 \newcommand{\p}{\partial}
 \newcommand{\ext}{\mathop{}\!\mathrm{d}}
 \newcommand{\til}[1]{\widetilde{ #1 }}
@@ -27,6 +27,8 @@
 \newcommand{\cphi}{\cos\phi}
 \newcommand{\fr}{\frac{1+\ep q}{1+\ep\beta_\para}}
 \newcommand{\frinv}{\frac{1+\ep\beta_\para}{1+\ep q}}
+\newcommand{\GN}{G_\perp^N}
+\newcommand{\GD}{G_\perp^D}
 
 \newcommand{\pth} [1] {\left( #1 \right) }
 \newcommand{\br} [1] {\left[ #1 \right] }
@@ -38,13 +40,13 @@
 
 \title{Reduced MHD Manuscript}
 \author{Finny Valorz}
-\date{June 2024}
+%\date{June 2024}
 \begin{document}
 \maketitle
 
 
 
-1: MHD Eqns. 2: ND process and ordering. 3: Split para/perp. Alg from two. 4: Fast-Slow Attempt. 5: 2D Decomps and q. 6: Take 4 and change vars. 7: New wFSS. Appendix: Lemmas and Identities. 
+1: MHD Eqns. 2: ND process and ordering. 3: Split para/perp. Alg from two. 4: Fast-Slow Attempt. 5: 2D Decomps and q. 6: Take EoMs and change vars. 7: New wFSS. Appendix: Lemmas and Identities. 
 
 \section{MHD Equations of Motion} 
 The magnetohydrodynamic (MHD) equations describe the time evolution of a charged fluid's mass density $\rho$, velocity $\bm{v}$, and magnetic field $\bm{B}$ in some spatial domain $Q\subset \mathbb{R}^3$. In this analysis, we fix $Q=D^2\times S^1$, the solid 2-torus. We choose poloidal coordinates $x,y\in D^2$ on the cross-sectional discs, and toroidal coordinate $z \in S^1$. The poloidal diameter $a$ and outer toroidal circumference $L$ provide characteristic length scales for our system's dynamics. 
@@ -58,9 +60,9 @@ In addition to a solenoidal condition, $\nabla\cdot \bm{B}=0$, our system consis
 \end{align}
 
 We assume that the pressure $p=p(\rho)$ is a function only of density. Standard boundary conditions for this system of equations are
-\begin{align*} 
+\begin{align} 
     \bm{B}\cdot \bm{n} = 0 \quad \text{ and }\quad  \bm{v}\cdot \bm{n} = 0 \quad \text{ on }\quad \p Q,
-\end{align*}
+\end{align}
 where $\bm{n}$ denotes the outward pointing unit normal on the surface $\p Q$. 
 
 
@@ -72,104 +74,649 @@ Because our domain factorizes, it is convenient to nondimensionalize our coordin
 \begin{align*}
     x=aX,\quad y=aY,\quad z=\frac{L}{2\pi}Z.
 \end{align*}
-This allows us to replace the explicit dependence on both $a$ and $L$ with just the aspect ratio $\ep = 2\pi a/L$. For example, if we multiply each equation by a factor of $a$, the standard gradient becomes $a\nabla = \np + \ep\bm{e}_Z\p_Z$, where $\np = \pth{\p_X, \p_Y, 0}$. In these coordinates, the divergenceless condition is    
-\begin{align*}
-    a\nabla\cdot\bm{B} = \np\cdot\bm{B}_\perp + \ep\p_Z B_Z = 0, \quad\text{or}\quad \np\cdot\bm{B}_\perp = -\ep\p_ZB_Z. 
-\end{align*}
+This split allows us to replace the explicit dependence on both $a$ and $L$ with the aspect ratio $\ep = 2\pi a/L$. For example, if we multiply each equation by a factor of $a$, the standard gradient becomes $a\nabla = \np + \ep\bm{e}_Z\p_Z$, where $\np = \pth{\p_X, \p_Y, 0}$. In these coordinates, the divergenceless condition is    
+\begin{align}
+    a\nabla\cdot\bm{B} = \np\cdot\bm{B}_\perp + \ep\p_Z B_Z = 0, \quad\text{or}\quad \np\cdot\bm{B}_\perp = -\ep\p_ZB_Z \quad\text{for}\quad \bm{B}_\perp = \pmat{B_X \\ B_Y \\ 0}.
+\end{align}
+Similarly, we use $\bm{v}_\perp = \pmat{v_X \\ v_Y \\ 0}$ to refer to the component of $\bm{v}$ perpendicular to $Z$. 
 
 Many plasma experiments take place on large aspect-ratio toroidal domains, where the ratio $\ep = 2\pi a/L$ is small. In such experiments, the magnetic field is usually much stronger in the toroidal than the poloidal directions, and the variations are small. Density is also relatively constant when $\ep\to 0$. This behavior motivates us to examine the specific ordering where 
-\begin{align*}
-    \rho &= \rho_0 \pth{1+\ep r} \\
-    \bm{v} &= v_0 \bm{\nu} \\ 
-    \bm{B} &= B_0 \pmat{\ep\beta_x \\ \ep\beta_y \\ 1+\ep\beta_\para},
-\end{align*}
-with $r, \bm{\nu}, \beta_x, \beta_y,$ and $\beta_\para$ all $O\pth{1}$ in $\ep$. The constant coefficients $\rho_0, v_0,$ and $B_0$ represent values typical of a given experiment, which can be relatiely small or large. Time and pressure will be treated similarly, so that $t=t_0\tau$ and $p=p_0\pi(r)$ with $\tau,\pi(r) = O(1)$.
-
-{\color{red} I should write it this way: 
-\begin{align*}
-    \rho &= \rho_0 \pth{1+\ep r} \\
-    \bm{v} &= v_0 \bm{\nu} = v_0 \pmat{\nu_X \\ \nu_Y \\ \nu_Z} = v_0 \pmat{\bm{\nu}_\perp \\ \nu_Z} \\ 
-    \bm{B} &= B_0 \bm{\beta} = B_0 \pmat{\ep\beta_X \\ \ep\beta_Y \\ 1+\ep\beta_\para} = B_0 \pmat{\ep\bm{\beta}_\perp \\ \beta_Z},
-\end{align*}
-Why do I have $\nu_\para$ instead of $\nu_Z$? Why does $\bm{\beta}_\perp$ not include the $\ep$?}
+\begin{align}
+    \rho &= \rho_0 \pth{1+\ep r}, \nonumber\\
+    \bm{v} &= v_0\bm{\nu} = v_0 \pmat{\bm{\nu}_\perp \\ \nu_\para}, \\ 
+    \bm{B} &= B_0 \pmat{\ep\bm{\beta}_\perp \\ 1 + \ep \beta_\para}, \nonumber
+\end{align}
+The seven nondimensional components of $r, \bm{\nu}_\perp = \pth{\nu_X, \nu_Y, 0}^T, \nu_\para, \bm{\beta}_\perp = \pth{\beta_X, \beta_Y, 0}^T,$ and $\beta_\para$ are written at $O\pth{1}$ in $\ep$ and describe leading order variations in our seven physical variables. The constant coefficients $\rho_0, v_0,$ and $B_0$ represent values typical of a given experiment, which can be relatiely small or large. Time and pressure will be treated similarly, so that $t=t_0\tau$ and $p=p_0\pi(r)$ with $\tau,\pi(r) = O(1)$.
 
 This scaling is similar to one taken by Strauss in 1975. In his scaling however, toroidal magnetic field fluctuations are assumed to be $O\pth{\ep^2}$, restricting the kinds of scenarios where this process can be applied. Despite density fluctuations being small for small $\ep$, he also allows variations at $O(1)$, so that 
 \begin{align*}
-    \rho &= \rho_0 r \\
-    \bm{v} &= v_0 \bm{\nu} \\ 
-    \bm{B} &= B_0 \pmat{\ep\beta_x \\ \ep\beta_y \\ 1+\ep^2\beta_\para}.
+    \rho &= \rho_0 r, \\
+    \bm{v} &= v_0 \pmat{\bm{\nu}_\perp \\ \nu_\para}, \\ 
+    \bm{B} &= B_0 \pmat{\ep\bm{\beta}_\perp \\ 1+\ep^2\beta_\para}.
 \end{align*}
 These assumptions are updated in the current analysis. 
 
 When we rewrite our nondimensionalized MHD system in the following sections, we will find the following dimensionless ratios:  
 \begin{align*}
-    \frac{t_0 v_0}{a} = 1, \qquad 
+    \frac{t_0 v_0}{a} = \ep, \qquad 
     \frac{p_0}{\mu_0^{-1}B_0^2} = \beta_0, \qquad 
     \frac{\rho_0\,v_0^2}{p_0} = M_0^2. 
 \end{align*}
-The first of these establishes a particular observation timescale, where we are zoomed in on dynamics in the poloidal plane. The second and third define the plasma-beta parameter, $\beta_0$, and Mach number, $M_0$, respectively. Different orderings of these quantities in $\ep$ correspond to different regimes, where plasma behavior is characteristically different. 
+The first of these establishes a particular observation timescale, where we are zoomed in on dynamics in the poloidal plane. The second and third define the plasma-beta parameter, $\beta_0$, and Mach number, $M_0$, respectively. Different orderings of these quantities in $\ep$ correspond to different dynamical regimes, where plasma behavior is characteristically different. 
 
 
 \section{Rescaled Evolution Equations}
 \subsection{Continuity Equation}
 In our new dimensionless coordinates, the continuity equation reads
 \begin{align*}
-    a\deriv{\rho}{t} &= -\np\cdot\pth{\rho\bm{v}_\perp} - \ep\p_Z\pth{\rho v_Z}. 
-\end{align*}
-\begin{align*}
-    \ep\frac{a\rho_0}{t_0}\deriv{r}{\tau} &= -a\nabla\cdot\pth{\rho\bm{v}} \\ 
-    &= -\rho_0v_0\np\cdot\pth{\pth{1+\ep r}\bm{\nu}_\perp} - \ep\rho_0v_0 \p_Z\pth{\pth{1+\ep r}\nu_\para} \\ 
-    &= -\rho_0v_0 a\nabla\cdot\pth{\pth{1+\ep r} \bm{\nu}}, 
+    \ep\frac{a\rho_0}{t_0}\deriv{r}{\tau} &= -a\nabla\cdot\pth{\rho\bm{v}} = -\rho_0v_0\np\cdot\pth{\pth{1+\ep r}\bm{\nu}_\perp} - \ep\rho_0v_0 \p_Z\pth{\pth{1+\ep r}\nu_\para}, 
 \end{align*}
 or, identifying our scaling coefficients, 
-\begin{align*} 
-    \ep\deriv{r}{\tau} &= -\frac{t_0v_0}{a} a\nabla\cdot\pth{\pth{1+\ep r}\bm{\nu}}
-    = -\np\cdot\pth{\pth{1+\ep r}\bm{\nu}_\perp} - \ep\p_Z\pth{\pth{1+\ep r}\nu_\para}. 
-\end{align*}
+\begin{align} 
+    \deriv{r}{\tau} &= -\np\cdot\pth{\pth{1+\ep r}\bm{\nu}_\perp} - \ep\p_Z\pth{\pth{1+\ep r}\nu_\para}. 
+\end{align}
 
 \subsection{Momentum Conservation}
 Equation \eqref{momentum} contains three terms which must be separated into their poloidal and toroidal components in order to identify dimensionless parameters.
 \begin{align*}
     \frac{a\rho_0v_0}{t_0} \pth{1+\ep r} \deriv{\bm{\nu}}{\tau} &= \mu_0^{-1} \pth{a\nabla\times \bm{B}} \times \bm{B} - a\nabla p(\rho) - \rho \bm{v}\cdot a\nabla \bm{v}. 
 \end{align*}
-To isolate the evolution of $\bm{\nu}$, we will remove $\frac{\rho_0v_0}{t_0} \pth{1+\ep r}$ from both sides. 
-
 For the first term, we make use of the identity $\pth{\nabla\times\bm{B}}\times\bm{B} = \bm{B}\cdot\nabla\bm{B} - \pth{\nabla\bm{B}}\cdot\bm{B}$ to get 
-\begin{align*}
-    \br{\pth{a\nabla\times\bm{B}}\times\bm{B}}_Z &= \bm{B}\cdot a\nabla B_Z - \ep\pth{\p_Z\bm{B}}\cdot\bm{B} \\ 
-    &= \pth{\bm{B}_\perp\cdot\np B_Z + \ep B_Z\p_Z B_Z} - \pth{\ep\bm{B}_\perp\cdot\p_Z\bm{B}_\perp + \ep B_Z\p_ZB_Z} \\ 
-    &= \bm{B}_\perp\cdot \np B_Z + \ep\bm{B}_\perp\cdot \p_Z\bm{B}_\perp \\ 
-    &= B_0^2 \pth{\ep^2\bm{\beta}_\perp\cdot\np\beta_\para + \ep^3 \bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp}  \quad\text{and}
-\end{align*}
-Note! $\beta_\perp\cdot\p_Z\beta_\perp = \frac{1}{2}\p_Z|\beta_\perp|^2$. Which expression is handier? 
 \begin{align*}
     \br{\pth{a\nabla\times\bm{B}}\times\bm{B}}_\perp &= \bm{B}\cdot a\nabla\bm{B}_\perp - \pth{\np\bm{B}}\cdot\bm{B} \\ 
     &= \pth{\bm{B}_\perp\cdot\np\bm{B}_\perp + \ep B_Z\p_Z\bm{B}_\perp} - \pth{\pth{\np\bm{B}_\perp} \cdot\bm{B}_\perp + B_Z\np B_Z} \\ 
     &= \pth{\np\times\bm{B}_\perp}\times\bm{B}_\perp + B_Z\pth{\ep\p_Z\bm{B}_\perp - \np B_Z} \\ 
-    &= \ep^2 B_0^2 \pth{\np\times\bm{\beta}_\perp}\times\bm{\beta}_\perp + B_0^2 \pth{1+\ep\beta_\para} \pth{\ep^2\p_Z\bm{\beta}_\perp - \ep\np\beta_\para}. 
+    &= \ep^2 B_0^2 \pth{\np\times\bm{\beta}_\perp}\times\bm{\beta}_\perp + \ep B_0^2 \pth{1+\ep\beta_\para} \pth{\ep\p_Z\bm{\beta}_\perp - \np\beta_\para} \quad\text{and}
 \end{align*}
-
+\begin{align*}
+    \br{\pth{a\nabla\times\bm{B}}\times\bm{B}}_\para &= \bm{B}\cdot a\nabla B_Z - \ep\pth{\p_Z\bm{B}}\cdot\bm{B} \\ 
+    &= \pth{\bm{B}_\perp\cdot\np B_Z + \ep B_Z\p_Z B_Z} - \pth{\ep\bm{B}_\perp\cdot\p_Z\bm{B}_\perp + \ep B_Z\p_ZB_Z} \\ 
+    &= \bm{B}_\perp\cdot \np B_Z - \ep\bm{B}_\perp\cdot \p_Z\bm{B}_\perp \\ 
+    &= \ep^2B_0^2 \pth{\bm{\beta}_\perp\cdot\np\beta_\para - \ep\bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp}.
+\end{align*}
+%Note! $\beta_\perp\cdot\p_Z\beta_\perp = \frac{1}{2}\p_Z|\beta_\perp|^2$. Which expression is handier? 
 The second and third terms are just   
 \begin{align*}
     a\nabla p &= p_0\pth{\np\pi + \ep\bm{e}_Z\p_Z\pi}, \quad\text{and} \\ 
-    \rho\bm{v}\cdot a\nabla\bm{v} &= \rho_0v_0^2 \pth{1+\ep r} \pth{\bm{\nu}_\perp\cdot\np\bm{\nu} + \ep\nu_\para\p_Z\bm{\nu}}. 
+    \rho\bm{v}\cdot a\nabla\bm{v} &= \rho_0v_0^2 \pth{1+\ep r} \pth{\bm{\nu}_\perp\cdot\np\bm{\nu} + \ep\nu_\para\p_Z\bm{\nu}}, 
 \end{align*}
-Altogether, removing a factor of $\pth{1+\ep r} \rho_0v_0/t_0$ from both sides, we have evolution equations for the dimensionless velocity fields $\nu_\para$ and $\bm{\nu}_\perp$:  
+where derivatives of pressure are taken by expanding about $r=0$:
 \begin{align*}
-    \pth{1+\ep r} \deriv{\nu_\para}{\tau} &= \ep^2 \frac{t_0v_0}{a} \frac{\mu_0^{-1} B_0^2}{\rho_0v_0^2} \pth{\bm{\beta}_\perp\cdot\np\beta_\para + \bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp} - \ep\frac{t_0v_0}{a}\frac{p_0}{\rho_0v_0^2} \p_Z\pi - \frac{t_0v_0}{a} \pth{1+\ep r} \pth{\bm{\nu}_\perp \cdot \np\nu_\para + \ep \nu_\para\p_Z\nu_\para} \\ 
-    &= \ep^2\frac{1}{M_0^2\beta_0} \pth{\bm{\beta}_\perp\cdot\np\beta_\para + \ep\bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp} - \ep \frac{1}{M_0^2\beta_0} \beta_0\p_Z\pi - \pth{1+\ep r} \pth{\bm{\nu}_\perp\cdot\np\nu_\para + \ep \nu_\para\p_Z\nu_\para}. 
-\end{align*}
-\begin{align*}
-    \deriv{\bm{\nu}_\perp}{\tau} &= 
-\end{align*}
+    \pi\pth{1+\ep r} &= \pi(1) + \pi'(1)\ep r + \frac{1}{2}\pi''(1)\pth{\ep r}^2 + \cdots = \sum_{n=1}^\infty \frac{\pi^{n}(1)}{n!}\pth{\ep r}^2.
+\end{align*} 
+
+Altogether, after canceling dimensional constants and identifying scaling parameters, we get evolution equations for $\bm{\nu}_\perp$ and $\nu_\para$:  
+\begin{align}
+    \pth{1+\ep r} \deriv{\bm{\nu}_\perp}{\tau} &= \ep^3 \frac{1}{M_0^2\beta_0} \pth{\np\times\bm{\beta}_\perp}\times\bm{\beta}_\perp + \ep^2\frac{1}{M_0^2\beta_0} \pth{1+\ep\beta_\para} \pth{\ep\p_Z\bm{\beta}_\perp - \np\beta_\para} \nonumber\\ 
+    &- \ep\frac{1}{M_0^2\beta_0}\beta_0\np\pi - \ep\pth{1+\ep r} \pth{\bm{\nu}_\perp\cdot\np\bm{\nu}_\perp + \ep\nu_\para\p_Z\bm{\nu}_\perp}, \\ 
+    \pth{1+\ep r} \deriv{\nu_\para}{\tau} &= \ep^3\frac{1}{M_0^2\beta_0} \pth{\bm{\beta}_\perp\cdot\np\beta_\para - \ep\bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp} \nonumber\\ 
+    &- \ep^2\frac{1}{M_0^2\beta_0}\beta_0 \p_Z\pi - \ep\pth{1+\ep r} \pth{\bm{\nu}_\perp\cdot\np\nu_\para + \ep \nu_\para\p_Z\nu_\para}.
+\end{align}
 
 
 \subsection{Faraday Induction}
-\begin{align*} 
-\deriv{B_z}{t} &= 
-    \pth{B_\perp\cdot\np + B_z\p_z}v_z - \br{(v_\perp\cdot\np + v_z\p_z) + (\np\cdot v_\perp + \p_zv_z)} B_z \\
-    &= B_\perp\cdot\np v_z - v_\perp\cdot\np B_z - v_z\p_zB_z - \np \cdot v_\perp B_z 
+Similarly, we will split Faraday's Law into components parallel and perpendicular to $Z$ using
+\begin{align*}
+    \deriv{\bm{B}}{t} &= \nabla\times\pth{\bm{v}\times\bm{B}} = \pth{\bm{B}\cdot\nabla} \bm{v} + \cancel{\pth{\nabla\cdot\bm{B}}} \bm{v} - \pth{\bm{v}\cdot\nabla} \bm{B} - \pth{\nabla\cdot\bm{v}} \bm{B}.
 \end{align*}
+This gives
+\begin{align}\label{faradayperp}
+a\deriv{\bm{B}_\perp}{t} = \ep\frac{aB_0}{t_0} \deriv{\bm{\beta}_\perp}{\tau} 
+    &= \pth{\bm{B}_\perp\cdot\np + \ep B_Z\p_Z}\bm{v}_\perp - \pth{\bm{v}_\perp\cdot\np + \ep v_Z\p_Z}\bm{B}_\perp - \pth{\np\cdot\bm{v}_\perp + \ep \p_Zv_Z}\bm{B}_\perp \nonumber\\ 
+    &= \np\times\pth{\bm{v}_\perp\times\bm{B}_\perp} + \ep\pth{\p_ZB_Z + B_Z\p_Z}\bm{v}_\perp - \ep\pth{\p_Zv_Z + v_Z\p_Z}\bm{B}_\perp \nonumber\\ 
+    &= \ep\p_Z\pth{B_Z\bm{v}_\perp - v_Z\bm{B}_\perp} - \bm{e}_Z\times\np\pth{\bm{e}_Z\cdot\bm{v}_\perp\times\bm{B}_\perp} \\
+    \Longrightarrow \deriv{\bm{\beta}_\perp}{\tau} &= \ep\p_Z\pth{\pth{1+\ep\beta_\para}\bm{\nu}_\perp - \ep\nu_\para\bm{\beta}_\perp} - \ep\bm{e}_Z\times\np\pth{\bm{e}_Z\cdot\bm{\nu}_\perp\times\bm{\beta}_\perp}
+    %\np\times\pth{\bm{v}_\perp\times\bm{B}_\perp} &= \pth{B_\perp\cdot\np - \ep\p_ZB_Z} v_\perp - \pth{v_\perp\cdot\np + \np\cdot v_\perp} B_\perp
+\end{align}
+\begin{align} \label{faradaypara}
+a\deriv{B_Z}{t} = \ep \frac{aB_0}{t_0} \deriv{\beta_\para}{\tau} &= 
+    \pth{\bm{B}_\perp\cdot\np + \ep B_Z\p_Z}v_Z - \pth{\bm{v}_\perp\cdot\np + \ep v_Z\p_Z} B_Z - \pth{\np\cdot\bm{v}_\perp + \ep \p_Zv_Z} B_Z \nonumber \\
+    &= \bm{B}_\perp\cdot\np v_Z - \bm{v}_\perp\cdot\np B_Z - \ep v_Z\p_ZB_Z - \pth{\np\cdot\bm{v}_\perp} B_Z \nonumber \\ 
+    \Longrightarrow \deriv{\beta_\para}{\tau} &= \ep\bm{\beta}_\perp\cdot\np\nu_\para - \ep \bm{\nu}_\perp \cdot\np\beta_\para - \ep^2 \nu_\para\p_Z\beta_\para - \pth{\np\cdot\bm{\nu}_\perp} \pth{1+\ep\beta_\para}.
+\end{align}
+Line \eqref{faradayperp} was obtained by recognizing that $\bm{v}_\perp\times\bm{B}_\perp = \pth{\bm{e}_Z\cdot\bm{v}_\perp\times\bm{B}_\perp}\bm{e}_Z$ lies entirely in the $Z$ direction. 
+
+
+\section{Fast-Slow Systems: First Attempt}
+Notice that when $\ep$ is small, some of the time derivatives above are much smaller than others, so that those variables appear almost static relative to the others. The framework of fast-slow dynamical systems helps formalize this distinction. 
+
+\begin{definition}[Fast-Slow System]
+    A fast-slow dynamical system (with fast variable $y\in Y$ and slow variable $x\in X$) is one whose equations of motion depend smoothly on $\ep$,
+    \begin{align*}
+        \frac{dy}{d\tau} = \dot{y} &= f_\ep(x,y) = f_0 + \ep f_1 + \ep^2 f_2 + \cdots \\ 
+        \frac{dx}{d\tau} = \dot{x} &= \ep g_\ep(x,y) = \ep \pth{g_0 + \ep g_1 + \ep^2 g_2 + \cdots},
+    \end{align*}
+    while satisfying the constraint:
+    \begin{align} \label{constraint}
+        D_yf_0(x,y): Y \rightarrow Y \ \text{is invertible whenever}\ f_0(x,y)=0.
+    \end{align}
+\end{definition}
+
+The limit system $\dot{y}=f_0$, $\dot{x}=0$ is obtained by taking $\ep\to 0$. By (Lemma \ref{limitsystem}), only the limit system needs to obey constraint \eqref{constraint} to be fast-slow. 
+
+In Section \ref{asymptotic corrections}, we will show that the trajectories of fast variables can be written as a function of slow variables according to the expansion, $y^*_\ep(x) = y^*_0 + \ep y^*_1 + \cdots$. In some cases $y^*_\ep(x)$ is not unique, and there is instead a family of possible fast trajectories. This occurs when $D_yf_0$ is only surjective instead of invertible. These systems are called ``weakly fast-slow." 
+
+Our evolution equations have some terms that appear at different orders depending on $M_0$ and $\beta_0$. We will consider three regimes, each having $M_0^2\beta_0=\ep^2$. Then, to find our limit system, we take $\ep\to0$ and see which terms remain. Doing this in all three cases suggests a fast slow split where 
+\begin{align*}
+    x = (\nu_\parallel,\bm{\beta}_\perp),\quad y = (r,\bm{\nu}_\perp,\beta_\parallel).
+\end{align*}
+
+
+\subsection{Low-$\beta$ Scaling}
+In low-$\beta$ scaling, $M_0^2 = 1$, $\beta_0 = \ep^2$, the limiting fast-variable evolution equations become
+\begin{align*}
+\p_\tau r &= -\np\cdot\bm{\nu}_\perp\\
+\p_\tau \bm{\nu}_\perp & = -\np\beta_\para\\
+\p_\tau \beta_\para & = -\np\cdot\bm{\nu}_\perp.
+\end{align*}
+This choice of dependent variables does not comprise a fast-slow split because $D_yf_0(x,y)$ is neither injective nor surjective, so it fails to satisfy the constraint \eqref{constraint}. The derivatives in
+\begin{equation} \begin{split}
+    D_yf_0(x,y) [\delta y] = \pth{\deriv{f_0^j}{y^i} \br{\delta y^i}} 
+    &= \pmat{\deriv{}{r}f_0^r & \deriv{}{\bm{\nu}_\perp}f_0^r & \deriv{}{\beta_\para}f_0^r\\ \deriv{}{r}f_0^{\bm{\nu}_\perp} & \ddots & \vdots \\ \deriv{}{r}f_0^{\beta_\para} & \cdots & \deriv{}{\beta_\para}f_0^{\beta_\para}} 
+    \bmat{\delta r \\ \delta \bm{\nu}_\perp \\ \delta \beta_\para} \\
+    &= \pmat{0 & -\np \cdot & 0 \\ 0 & 0 & -\np \\ 0 & -\np \cdot & 0} 
+    \bmat{\delta r \\ \delta \bm{\nu}_\perp \\ \delta \beta_\para}
+    = \pmat{-\np \cdot \delta \bm{\nu}_\perp \\ -\np \delta \beta_\para \\ -\np \cdot \delta \bm{\nu}_\perp }.
+\end{split} \end{equation}
+are found using $\p f_0^j/\p y^i \br{\delta y^i} = \frac{d}{d\alpha} f_0^j \pth{y^i+ \alpha \delta y^i}$.  
+\begin{proof} [Injectivity:] 
+    A linear map is injective if and only if its kernel is $\{0\}$. Let $\delta y = \pth{\delta r,0,0}$ for some $\delta r\neq 0$. $\delta y \in\ker D_yf_0$, so $D_yf_0$ is not injective.
+\end{proof}
+\begin{proof} [***Surjectivity:] 
+    Given any $\delta\bar{y}\in Y$, we are unable to construct a $\delta y\in Y$ for which $D_yf_0[\delta y] = \delta\bar{y}$.  $\delta r$
+\end{proof}
+
+Intuitively, a fast-slow system ought to change on the fast timescale with a change in one of its fast variables. The system above is degenerate in the fast variable $r$, which suggests there are hidden slow variables among these fast variables.
+
+
+\subsection{High-$\beta$ Scaling}
+In the high-$\beta$ scaling $M_0^2 = \ep$, $\beta_0 = \ep$, the limiting fast-variable evolution equations are identical to the low-$\beta$ scaling, and so do not comprise a fast-slow split:
+\begin{align*}
+\p_\tau r & = -\np\cdot\bm{\nu}_\perp\\
+\p_\tau \bm{\nu}_\perp & = -\np\beta_\para\\
+\p_\tau \beta_\para & = -\np\cdot\bm{\nu}_\perp.
+\end{align*}
+
+\subsection{Low-Flow Scaling}
+In low-flow scaling, $M_0^2 = \epsilon^2$, $\beta_0 = 1$ (where $\beta_0$ is actually larger than in high-$\beta$), the limiting fast-variable evolution equations are
+\begin{align*}
+\p_\tau r &= -\np\cdot\bm{\nu}_\perp\\
+\p_\tau \bm{\nu}_\perp & = -\np (\pi^\prime(1)r + \beta_\para)\\
+\p_\tau \beta_\para & = -\np\cdot\bm{\nu}_\perp.
+\end{align*}
+This time, fast directional derivative looks like 
+\begin{align} 
+    D_yf_0(x,y) [\delta y] 
+    &= \pmat{0 & -\np \cdot & 0 \\ -\pi'(1)\np & 0 & -\np \\ 0 & -\np \cdot & 0}
+    \bmat{\delta r \\ \delta \bm{\nu}_\perp \\ \delta \beta_\para} = \pmat{-\np \cdot \delta \bm{\nu}_\perp \\ -\np \pth{\pi'(1)\delta r + \delta \beta_\para} \\ -\np \cdot \delta \bm{\nu}_\perp}.
+\end{align}
+Although this system is no longer degenerate in $r$, it still fails to satisfy condition (\ref{constraint}). 
+\begin{proof} [Injectivity:]
+    $\delta y+c\in\ker D_yf_0$ for any $\delta y=0$ and constant $c$. 
+\end{proof}
+\begin{proof} [Surjectivity:]
+    ***
+\end{proof}
+
+In each regime, the fact that the apparent fast-slow split is not correct suggests there is a nicer set of dependent variables to describe ideal MHD that cleanly separates fast and slow dynamics. The following section is devoted to identifying such variables.
+
+
+\section{Nicer Dependent Variables for MHD}
+Given any planar vector field $\bm{w}_\perp$ on a domain $D$ diffeomorphic to the unit disc with $\bm{n}\cdot\bm{w}_\perp = 0$ on $\partial D$, there are unique scalar fields $\phi,\psi:D\rightarrow\mathbb{R}$ such that
+\begin{align}
+\bm{w}_\perp = \np\phi + \bm{e}_Z\times\np\psi,\quad \bm{n}\cdot\np\phi = 0\text{ on }\partial D,\quad \int_D\phi \,dxdy = 0,\quad \psi = 0\text{ on }\partial D.\label{potential_rep}
+\end{align}
+The scalars are determined from $\bm{w}_\perp$ by solving the pair of Poisson equations given by
+\begin{align} \label{poisson}
+    \lap\phi = \np\cdot\bm{w}_\perp, && \lap\psi = \bm{e}_Z\cdot \np\times\bm{w}_\perp,
+\end{align}
+subject to the boundary conditions listed in \eqref{potential_rep}. As described in the appendix (\ref{}), these equations can be inverted by the Green's operators $\GN:L^2\to\mathcal{N}$ and $\GD:L^2\to\mathcal{D}$, where $\mathcal{N}$ and $\mathcal{D}$ are spaces of $L^2$ functions with homogeneous Neumann and Dirichlet boundary conditions on the disc, respectively:
+\begin{align*}
+    \phi = \GN\lap\phi = \GN\pth{\np\cdot\bm{w}_\perp}, && \psi = \GD\lap\psi = \GD\pth{\bm{e}_Z\cdot\np\times\bm{w}_\perp}.
+\end{align*}
+
+For each fixed $Z$, these considerations apply to the vector fields $\bm{\nu}_\perp$ and $\bm{\beta}_\perp$. Thus, there are ($Z$-dependent) scalar fields $\phi,\psi,\Phi,\Psi$ such that
+\begin{align*}
+\bm{\nu}_\perp & = \np\phi + \bm{e}_Z\times \np\psi\\
+\bm{\beta}_\perp & = \np\Phi + \bm{e}_Z\times \np\Psi,
+\end{align*}
+and
+\begin{gather*}
+\psi = \Psi = 0 \text{ on } \p D,\quad \bm{n}\cdot\np\phi = \bm{n}\cdot\np\Phi = 0 \text{ on } \p D,\quad \iint_D \phi\ dxdy = \iint_D \Phi\ dxdy = 0,
+\end{gather*}
+where $D$ denotes the poloidal cross section of the spatial domain $Q$. We name the spaces of functions with homogeneous Dirichlet and Neumann boundary conditions $\psi,\Psi\in\mathcal{D}$ and $\phi,\Phi\in\mathcal{N}$, respectively. We will exchange the dependent variables $\bm{\beta}_\perp,\bm{\nu}_\perp$ with the four scalars $\phi,\Phi,\psi,\Psi$.
+
+Note that the divergenceless magnetic field constraint, $\nabla\cdot\bm{B} = \np\cdot\bm{\beta}_\perp + \ep\p_Z\beta_\para = \lap\Phi + \ep\p_Z\beta_\para = 0$ actually lets us ignore one degree of freedom in $\bm{\beta}_\perp$. Specifically, $\Phi = -\ep\GN\p_Z\beta_\para$ is determined uniquely by $\beta_\para$. It is still convenient to write some equations with $\bm{\beta}_\perp$ and $\Phi$ though. 
+
+
+\subsection{New $r$ Scaling}
+Since mass density $\rho$ is advected as a volume form and the magnetic field $\bm{B}$ is advected as a $2$-form, the ratio $\bm{B}/\rho$ is advected as a vector field. This follows from the following manipulations using Cartan calculus. Let $\varrho = \rho\,dxdydz$ denote the mass density volume form and $\beta = \iota_{\bm{B}}dxdydz$ the magnetic flux $2$-form. On the one hand
+\begin{align*}
+(\partial_t + \mathcal{L}_{\bm{u}})(\iota_{\bm{B}/\rho}\varrho) = \iota_{(\partial_t + \mathcal{L}_{\bm{u}})(\bm{B}/\rho)}\varrho,
+\end{align*}
+because $\varrho$ is advected by $\bm{u}$. On the other hand 
+\begin{align*}
+(\partial_t + \mathcal{L}_{\bm{u}})(\iota_{\bm{B}/\rho}\varrho) = (\partial_t + \mathcal{L}_{\bm{u}})(\beta) = 0,
+\end{align*}
+because $\beta$ is advected by $\bm{u}$. Combining the two results implies $(\partial_t + \mathcal{L}_{\bm{u}})(\bm{B}/\rho) = 0$, as claimed. Contracting this vector field advection law with $dz$ implies 
+\begin{align} \label{Qevolution}
+\partial_tQ + \bm{u}\cdot\nabla Q = Q\frac{\bm{B}}{B_z}\cdot\nabla u_z,
+\end{align}
+where we have used the expressions \eqref{material continuity} - \eqref{material faraday}, and where $Q = B_z/\rho$.
+
+We will exchange the dependent variable $r$ with a nondimensional version of $Q$, defined according to 
+\begin{equation} 
+    Q = \frac{B_z}{\rho} = \frac{B_0}{\rho_0} \frac{1+\ep\beta_\para}{1+\ep r} = q_0 (1+\ep q), 
+\end{equation}
+where $q_0 = B_0/\rho_0$. That is, we'll have 
+\begin{align} \label{qdefinition}
+    q = \frac{1}{\ep} \pth{\frac{1+\ep\beta_\para}{1+\ep r} - 1} = \frac{\beta_\para - r}{1+\ep r}.
+\end{align}
+
+
+\subsection{Helpful Brackets}
+In order to streamline computations, let us introduce the symmetric and antisymmetric brackets $\Braket{\cdot,\cdot}, [\cdot,\cdot]: C^\infty\times C^\infty\to C^\infty$ defined by 
+\begin{align}
+    \Braket{f,g} = \np f\cdot \np g && \text{and} && \br{f,g} = \bm{e}_z\cdot\pth{\np f \times \np g}. 
+\end{align}
+Each bracket is clearly linear, and so is compatible with our ordering scheme. These brackets help to simplify the particularly common quantities
+\begin{align}
+    \np f\cdot \bm{w}_\perp &= \Braket{f, \phi} - [f, \psi], \\ 
+    \bm{e}_z \cdot (\np f \times\bm{w}_\perp) &= \Braket{f, \psi} + [f, \phi]. 
+\end{align}
+
+
+\section{New Evolution Equations}
+Now, we have 6 new variables for representing our system: $\phi$, $\psi$, $\nu_\para$, $\Psi$, $\beta_\para$, and $q$. In this section, we will simply rewrite our new equations of motion and truncate terms of order $\ep^3$ and higher. 
+
+Running tally of changes to make to EoMs: switch $\tau\to T$, formally set $M_0^2\beta_0=\ep^2$, remove $\Phi$, expand $\fr$ and $\pi\pth{\frinv}$, remove terms $O\pth{\geq\ep^3}$, fully expanded remaining terms. 
+
+\subsection{$\phi$ Evolution}
+According to \eqref{poisson}, the evolution of $\phi$ is given by the divergence of the $\bm{\nu}_\perp$'s evolution: $\np\cdot\p_\tau\bm{\nu}_\perp = \p_\tau\lap\phi = \lap\p_\tau\phi$. Replacing $r$ with $q$ and using $\np\times\bm{\beta}_\perp = \lap\Phi$, we have
+\begin{align*}
+    \deriv{\bm{\nu}_\perp}{\tau} 
+    &= \fr\pth{\ep\lap\Psi\bm{e}_Z\times\bm{\beta}_\perp - \ep^{-1}\beta_0\np\pi\pth{\frinv}} \\
+    &+ \pth{1+\ep q} \pth{\ep\p_Z\bm{\beta}_\perp - \np\beta_\para} - \ep\pth{\bm{\nu}_\perp\cdot\np\bm{\nu}_\perp + \ep\nu_\para\p_Z\bm{\nu}_\perp}.
+\end{align*}
+The quantity $\np\pi\pth{\frinv}$ is given as an $\ep$ expansion in the appendix (\ref{}). Using the brackets defined in the previous section and several identities derived in the appendix (\ref{}), the divergence of this expression becomes
+\begin{align}
+    \lap\deriv{\phi}{\tau} &= \np\pth{\fr}\cdot\pth{\ep\lap\Psi\bm{e}_Z\times\bm{\beta}_\perp - \ep^{-1}\beta_0\np\pi\pth{\frinv}} \nonumber\\
+    &+ \fr\np\cdot\pth{\ep\lap\Psi\bm{e}_Z\times\bm{\beta}_\perp - \ep^{-1}\beta_0\np\pi\pth{\frinv}} \nonumber\\
+    &+ \ep\np q\cdot\pth{\ep\p_Z\bm{\beta}_\perp - \np\beta_\para} + \pth{1+\ep q}\np\cdot\pth{\ep\p_Z\bm{\beta}_\perp - \np\beta_\para} \nonumber\\
+    &- \ep\np\cdot\pth{\bm{\nu}_\perp\cdot\np\bm{\nu}_\perp + \ep\nu_\para\p_Z\bm{\nu}_\perp} \nonumber\\
+    &= -\ep\lap\Psi\Braket{\fr, \Psi} - \ep\lap\Psi\br{\fr, \Phi} - \ep^{-1}\beta_0\Braket{\fr, \pi\pth{\frinv}} \nonumber\\ 
+    &- \ep\fr\Braket{\lap\Psi, \Psi} - \ep\fr\br{\lap\Psi, \Phi} - \ep\fr\pth{\lap\Psi}^2 - \ep^{-1}\beta_0\fr\lap\pi\pth{\frinv} \nonumber\\
+    &+ \ep^2\Braket{q, \p_Z\Phi} - \ep^2\br{q, \p_Z\Psi} - \ep\Braket{q,\beta_\para} + \ep\p_Z\lap\Phi + \ep^2q\p_Z\lap\Phi - \lap\beta_\para - \ep q\lap\beta_\para \nonumber\\ 
+    &- \ep\np\np\phi:\np\np\phi - \ep\Braket{\lap\phi, \phi} - \ep\lap\br{\psi,\phi} - \ep\np\np\psi:\np\np\psi \nonumber\\
+    &+ \ep\br{\lap\psi, \phi} + \ep\pth{\lap\psi}^2 - \ep^2\nu_\para \lap\p_Z\phi - \ep^2\Braket{\nu_\para, \p_Z\phi} + \ep^2\br{\nu_\para, \p_Z\psi}.
+\end{align}
+
+After replacing  $\Phi=-\ep\GN\p_Z\beta_\para$ and expanding $\fr$ in $\ep$ (\ref{appendix}), we can determine precisely which order each term contributes at (with the exception of two terms which depend on choice of $\beta_0$): 
+\begin{align*}
+    \lap\deriv{\phi}{\tau} &= - \beta_0\ep^{-1} \Braket{\fr, \pi\pth{\frinv}} - \beta_0\ep^{-1} \fr\lap\pi\pth{\frinv} \\
+    &- \ep^2\lap\Psi \Braket{q,\Psi} + \ep^2\lap\Psi \Braket{\beta_\para,\Psi} - \ep\Braket{\lap\Psi, \Psi} - \ep^2q \Braket{\lap\Psi, \Psi} + \ep^2 \beta_\para\Braket{\lap\Psi, \Psi} \\
+    &+ \ep^2\br{\lap\Psi, \GN\p_Z\beta_\para} -\ep\pth{\lap\Psi}^2 + \ep^2q\pth{\lap\Psi}^2 - \ep^2\beta_\para\pth{\lap\Psi}^2 \\
+    &- \ep^2\br{q, \p_Z\Psi} - \ep\Braket{q,\beta_\para} - \ep^2\p^2_Z\beta_\para - \lap\beta_\para - \ep q\lap\beta_\para \\
+    &- \ep^2\nu_\para \lap\p_Z\phi - \ep^2\Braket{\nu_\para, \p_Z\phi} + \ep^2\br{\nu_\para, \p_Z\psi} - \ep\np\np\phi:\np\np\phi - \ep\Braket{\lap\phi, \phi} \\
+    &- \ep\lap\br{\psi,\phi} - \ep\np\np\psi:\np\np\psi + \ep\br{\lap\psi, \phi} + \ep\pth{\lap\psi}^2 + O\pth{\ep^3}.
+\end{align*}
+When we expand the first line in $\ep$ using (\ref{appendix}), we find several terms that cancel with one another. Up to $O(\beta_0\ep)$, the result is 
+\begin{align*}
+    - \beta_0\ep^{-1} &\Braket{\fr, \pi\pth{\frinv}} - \beta_0\ep^{-1} \fr\lap\pi\pth{\frinv} \\
+    = &-\beta_0\pi'(1) \pth{\lap\beta_\para - \lap q} \\ 
+    &- \beta_0\ep \pi''(1) \Bigl( \beta_\para\lap \beta_\para - \beta_\para\lap q - q\lap\beta_\para + q\lap q + \left|\np\beta_\para\right|^2 - 2\Braket{\beta_\para,q} + |\np q|^2 \Bigr) \\ 
+    &- \beta_0\ep \pi'(1) \Bigl( q\lap q - 2\Braket{\beta_\para,q} + \left|\np q\right|^2 - \left|\np\beta_\para\right|^2 - \beta_\para\lap\beta_\para \Bigr) + O\pth{\beta_0\ep^2}.
+\end{align*}
+\begin{comment}\begin{align*}
+    - \beta_0\ep^{-1} &\Braket{\fr, \pi\pth{\frinv}} - \beta_0\ep^{-1} \fr\lap\pi\pth{\frinv} = \\
+    &-\beta_0\pi'(1) \lap\beta_\para + \beta_0\pi'(1) \lap q - \beta_0\ep\pi''(1) \beta_\para\lap \beta_\para \\ 
+    &+ \beta_0\ep\pi''(1) \beta_\para\lap q + \beta_0\ep\pi''(1) q\lap\beta_\para - \beta_0\ep\pi''(1) q\lap q \\ 
+    &- \beta_0\ep\pi''(1) \left|\np\beta_\para\right|^2 + 2\beta_0\ep\pi''(1) \Braket{\beta_\para,q} - \beta_0\ep\pi''(1) |\np q|^2 \\ 
+    &- \beta_0\ep\pi'(1) q\lap q + 2\beta_0\ep\pi'(1) \Braket{\beta_\para,q} - \beta_0\ep\pi'(1) \left|\np q\right|^2 \\ 
+    &+ \beta_0\ep\pi'(1) \left|\np\beta_\para\right|^2 + \beta_0\ep\pi'(1) \beta_\para\lap\beta_\para + O\pth{\beta_0\ep^2}. 
+\end{align*}\end{comment}
+Besides these, the only $O(1)$ contribution is $-\lap\beta_\para$. At $O(\ep)$, we have
+\begin{align*}
+    &- \ep\Braket{\lap\Psi, \Psi} - \ep\pth{\lap\Psi}^2 - \ep\Braket{q,\beta_\para} - \ep q\lap\beta_\para - \ep\np\np\phi:\np\np\phi \\
+    &- \ep\Braket{\lap\phi, \phi} - \ep\lap\br{\psi,\phi} - \ep\np\np\psi:\np\np\psi + \ep\br{\lap\psi, \phi} + \ep\pth{\lap\psi}^2.
+\end{align*}
+At $O(\ep^2)$, we have
+\begin{align*}
+    &- \ep^2\lap\Psi \Braket{q,\Psi} + \ep^2\lap\Psi \Braket{\beta_\para,\Psi} - \ep^2q \Braket{\lap\Psi, \Psi} + \ep^2 \beta_\para\Braket{\lap\Psi, \Psi} \\ 
+    &+ \ep^2\br{\lap\Psi, \GN\p_Z\beta_\para} + \ep^2q\pth{\lap\Psi}^2 - \ep^2\beta_\para\pth{\lap\Psi}^2 \\
+    &- \ep^2\br{q, \p_Z\Psi} - \ep^2\p^2_Z\beta_\para - \ep^2\nu_\para \lap\p_Z\phi - \ep^2\Braket{\nu_\para, \p_Z\phi} + \ep^2\br{\nu_\para, \p_Z\psi},
+\end{align*}
+and so on for higher orders. 
+
+
+\subsection{$\psi$-Evolution}
+According to (\ref{poisson}), $\bm{e}_Z\cdot\np\times\p_\tau\bm{\nu}_\perp = \lap\p_\tau\psi$. Applying this to \eqref{nuperpevolution},
+\begin{align*}
+    \lap\deriv{\psi}{\tau} &= \bm{e}_Z\cdot\np\pth{\fr} \times\pth{\ep\lap\Psi\bm{e}_Z\times\bm{\beta}_\perp - \beta_0\ep^{-1}\np\pi\pth{\frinv}} \\
+    &+ \fr\bm{e}_Z\cdot\np\times\pth{\ep\lap\Psi\bm{e}_Z\times\bm{\beta}_\perp - \beta_0\ep^{-1}\np\pi\pth{\frinv}} \\
+    &+ \bm{e}_Z\cdot \np q \times \pth{\ep^2\p_Z\bm{\beta}_\perp - \ep\np\beta_\para} + \pth{1+\ep q} \bm{e}_Z\cdot \np\times \pth{\ep\p_Z\bm{\beta}_\perp - \np\beta_\para} \\
+    &- \ep\bm{e}_Z\cdot\np\times\pth{\bm{\nu}_\perp\cdot\np\bm{\nu}_\perp + \ep\nu_\para\p_Z\bm{\nu}_\perp} \\
+    &= \ep\lap\Psi\Braket{\fr, \Phi} - \ep\lap\Psi\br{\fr, \Psi} - \beta_0\ep^{-1}\br{\fr, \pi\pth{\frinv}} \\ 
+    &+ \ep\fr\Braket{\lap\Psi, \Phi} - \ep\fr \br{\lap\Psi, \Psi} + \ep\fr\lap\Phi\lap\Psi \\
+    &+ \ep^2\Braket{q, \p_Z\Psi} + \ep^2\br{q, \p_Z\Phi} -\ep\br{q, \beta_\para} + \ep\lap\p_Z\Psi + \ep^2q\lap\p_Z\Psi \\
+    &- \ep\Braket{\lap\psi, \phi} + \ep\br{\lap\psi, \psi} - \ep\lap\phi\lap\psi - \ep^2\Braket{\nu_\para, \p_Z\psi} - \ep^2\br{\nu_\para, \p_Z\phi} - \ep^2\nu_\para\lap\p_Z\psi.
+\end{align*}
+After replacing $\Phi=-\ep\GN\p_Z\beta_\para$ and expanding $\fr$, 
+\begin{align*}
+    \lap\deriv{\psi}{\tau} &= - \beta_0\ep^{-1} \br{\fr, \pi\pth{\frinv}} \\
+    &- \ep^2\lap\Psi\br{q,\Psi} + \ep^2\lap\Psi\br{\beta_\para,\Psi} - \ep^2\Braket{\lap\Psi, \GN\p_Z\beta_\para} - \ep\br{\lap\Psi, \Psi} \\
+    &- \ep^2q\br{\lap\Psi, \Psi} + \ep^2\beta_\para\br{\lap\Psi, \Psi} - \ep^2\p_Z\beta_\para\lap\Psi + \ep^2\Braket{q, \p_Z\Psi} \\
+    &- \ep\br{q, \beta_\para} + \ep\lap\p_Z\Psi +\ep^2q\lap\p_Z\Psi - \ep\Braket{\lap\psi, \phi} + \ep\br{\lap\psi, \psi} \\
+    &- \ep\lap\phi\lap\psi - \ep^2\Braket{\nu_\para, \p_Z\psi} -\ep^2\br{\nu_\para, \p_Z\phi} - \ep^2\nu_\para\lap\p_Z\psi + O\pth{\ep^3}.
+\end{align*}
+The only term containing $\beta_0$ is
+\begin{align*}
+    &- \beta_0\ep^{-1}\br{\fr, \pi\pth{\frinv}} \\
+    &= 
+\end{align*}
+Besides this, we have no $O(1)$ contributions. At $O(\ep)$, 
+\begin{align*}
+    - \ep\br{\lap\Psi, \Psi} - \ep\br{q, \beta_\para} + \ep\lap\p_Z\Psi - \ep\Braket{\lap\psi, \phi} + \ep\br{\lap\psi, \psi} - \ep\lap\phi\lap\psi.
+\end{align*}
+At $O(\ep^2)$, 
+\begin{align*}
+    &- \ep^2\lap\Psi\br{q,\Psi} + \ep^2\lap\Psi\br{\beta_\para,\Psi} - \ep^2\Braket{\lap\Psi, \GN\p_Z\beta_\para} - \ep^2q\br{\lap\Psi, \Psi} + \ep^2\beta_\para\br{\lap\Psi, \Psi} \\
+    &- \ep^2\p_Z\beta_\para\lap\Psi + \ep^2\Braket{q, \p_Z\Psi} + \ep^2q\lap\p_Z\Psi - \ep^2\Braket{\nu_\para, \p_Z\psi} - \ep^2\br{\nu_\para, \p_Z\phi} - \ep^2\nu_\para\lap\p_Z\psi.
+\end{align*}
+
+
+\subsection{$\nu_\para$-Evolution}
+\begin{align*}
+    \deriv{\nu_\para}{\tau} &= - \beta_0\fr\p_Z\pi\pth{\frinv} - \ep\pth{\bm{\nu}_\perp\cdot\np\nu_\para + \ep \nu_\para\p_Z\nu_\para} \\
+    &+ \fr\ep\pth{\bm{\beta}_\perp\cdot\np\beta_\para - \ep\bm{\beta}_\perp\cdot\p_Z\bm{\beta}_\perp} \\
+    &= - \beta_0\fr\p_Z\pi\pth{\frinv} - \ep\pth{\Braket{\nu_\para, \phi} - \br{\nu_\para, \psi} + \ep\nu_\para\p_Z\nu_\para} \\
+    &+ \fr\ep\pth{\Braket{\beta_\para, \Phi} - \br{\beta_\para, \Psi} - \ep\Braket{\Phi, \p_Z\Phi} - \ep\Braket{\Psi, \p_Z\Psi} - \ep\br{\p_Z\Psi, \Phi} - \ep\br{\Psi, \p_Z\Phi}} \\
+    &= - \beta_0\fr\p_Z\pi\pth{\frinv} - \ep\Braket{\nu_\para, \phi} + \ep\br{\nu_\para, \psi} - \ep^2\nu_\para\p_Z\nu_\para \\
+    &-\ep^2\Braket{\beta_\para, \GN\p_Z\beta_\para} - \ep\br{\beta_\para, \Psi} - \ep^2q\br{\beta_\para, \Psi} + \ep^2\beta_\para\br{\beta_\para,\Psi} - \ep^2\Braket{\Psi, \p_Z\Psi} + O\pth{\ep^3}.
+\end{align*}
+Again, only one $\beta_0$-dependent term, 
+\begin{align*}
+    - \beta_0\fr\p_Z\pi\pth{\frinv} &= 
+\end{align*}
+No $O(1)$ terms. $O(\ep)$ terms are 
+\begin{align*}
+    - \ep\Braket{\nu_\para, \phi} + \ep\br{\nu_\para, \psi} - \ep\br{\beta_\para, \Psi}.
+\end{align*}
+At $O(\ep^2)$, 
+\begin{align*}
+    - \ep^2\nu_\para\p_Z\nu_\para - \ep^2\Braket{\beta_\para, \GN\p_Z\beta_\para} - \ep^2q\br{\beta_\para, \Psi} + \ep^2\beta_\para\br{\beta_\para,\Psi} - \ep^2\Braket{\Psi, \p_Z\Psi}.
+\end{align*}
+
+
+\subsection{$\Psi$-Evolution}
+To find the evolution for $\Psi$, we take $\bm{e}_Z\cdot\np\times\p_\tau\bm{\beta}_\perp = \lap\p_\tau\Psi$ as we did for $\psi$.
+\begin{align*}
+    \deriv{\bm{\beta}_\perp}{\tau} &= \ep\p_Z\pth{\pth{1+\ep\beta_\para}\bm{\nu}_\perp - \ep\nu_\para\bm{\beta}_\perp} - \ep\bm{e}_Z\times\np\pth{\bm{e}_Z\cdot\bm{\nu}_\perp\times\bm{\beta}_\perp}
+\end{align*}
+\begin{align*}
+    \lap\deriv{\Psi}{\tau} &= \ep\bm{e}_Z\cdot\p_Z\pth{\ep\np\beta_\para\times\bm{\nu}_\perp + \pth{1+\ep\beta_\para}\np\times\bm{\nu}_\perp - \ep\np\nu_\para\times\bm{\beta}_\perp - \ep\nu_\para\np\times\bm{\beta}_\perp} \\
+    &- \ep\bm{e}_Z\cdot\pth{\np\cdot\np\pth{\bm{e}_Z\cdot\bm{\nu}_\perp\times\bm{\beta}_\perp}}\bm{e}_Z \\
+    &= \ep\p_Z\pth{\ep\Braket{\beta_\para, \psi} + \ep\br{\beta_\para, \phi} + \pth{1+\ep\beta_\para}\lap\psi - \ep\Braket{\nu_\para, \Psi} - \ep\br{\nu_\para, \Phi} - \ep\nu_\para\lap\Psi} \\ 
+    &- \ep\lap\pth{\Braket{\phi, \Psi} - \Braket{\psi, \Phi} + \br{\phi, \Phi} + \br{\psi, \Psi}} \\
+    &= \ep^2\p_Z\Braket{\beta_\para, \psi} + \ep^2\p_Z\br{\beta_\para, \phi} + \ep\p_Z\lap\psi + \ep^2\pth{\p_Z\beta_\para}\lap\psi + \ep^2\beta_\para\p_Z\lap\psi \\
+    &- \ep^2\p_Z\Braket{\nu_\para, \Psi} + \ep^3\br{\nu_\para, \GN\p_Z\beta_\para} - \ep^2\pth{\p_Z\nu_\para}\lap\Psi - \ep^2\nu_\para\p_Z\lap\Psi \\
+    &- \ep\lap\Braket{\phi, \Psi} - \ep^2\lap\Braket{\psi, \GN\p_Z\beta_\para} + \ep^2\lap\br{\phi, \GN\p_Z\beta_\para} - \ep\lap\br{\psi, \Psi}.
+\end{align*}
+No $O(1)$ contributions. At $O(\ep)$, 
+\begin{align*}
+    \ep\p_Z\lap\psi - \ep\lap\Braket{\phi, \Psi} - \ep\lap\br{\psi, \Psi}. 
+\end{align*}
+At $O\pth{\ep^2}$,
+\begin{align*}
+    &\ep^2\p_Z \Braket{\beta_\para, \psi} + \ep^2\p_Z\br{\beta_\para, \phi} + \ep^2\pth{\p_Z\beta_\para}\lap\psi + \ep^2\beta_\para\p_Z\lap\psi - \ep^2\p_Z\Braket{\nu_\para, \Psi} \\
+    &- \ep^2\pth{\p_Z\nu_\para}\lap\Psi - \ep^2\nu_\para\p_Z\lap\Psi - \ep^2\lap\Braket{\psi, \GN\p_Z\beta_\para} + \ep^2\lap\br{\phi, \GN\p_Z\beta_\para}. 
+\end{align*}
+At $O\pth{\ep^3}$, we just have $\ep^3\GD\p_Z\br{\nu_\para, \GN\p_Z\beta_\para}$, and nothing at higher orders. 
+
+
+\subsection{$\beta_\para$-Evolution}
+\begin{align*}
+    \deriv{\beta_\para}{\tau} &= \ep\bm{\beta}_\perp\cdot\np\nu_\para - \ep \bm{\nu}_\perp \cdot\np\beta_\para - \ep^2\nu_\para\p_Z\beta_\para - \pth{\np\cdot\bm{\nu}_\perp} \pth{1+\ep\beta_\para} \\
+    &= - \ep^2\Braket{\nu_\para, \GN\p_Z\beta_\para} - \ep\br{\nu_\para, \Psi} - \ep\Braket{\beta_\para, \phi} + \ep\br{\beta_\para, \psi} - \ep^2\nu_\para\p_Z\beta_\para - \lap\phi - \ep\beta_\para\lap\phi.
+\end{align*}
+If we would like to recover an evolution equation for $\Phi$, we can do so by taking $\p_\tau\Phi = -\ep\GN\p_Z\p_\tau\beta_\para$ of above. This equation has the $O(1)$ contribution $-\lap\phi$. At $O(\ep)$, 
+\begin{align*}
+    -\ep\br{\nu_\para, \Psi} - \ep\Braket{\beta_\para, \phi} + \ep\br{\beta_\para, \psi} - \ep\beta_\para\lap\phi.
+\end{align*}
+At $O(\ep^2)$,
+\begin{align*}
+    -\ep^2\Braket{\nu_\para, \GN\p_Z\beta_\para} - \ep^2\nu_\para\p_Z\beta_\para.
+\end{align*}
+There are no higher order contributions.
+
+
+\subsection{$q$-Evolution}
+\begin{align} \label{qevolution} 
+    \p_\tau q &= \frac{t_0}{\ep q_0} \p_tQ = \frac{t_0}{\ep a q_0} \br{Q\frac{\bm{B}}{B_z} \cdot a\nabla v_z - \bm{v}\cdot a\nabla Q} \nonumber\\ 
+    &= \frac{t_0v_0}{a} \frac{1}{\ep q_0} \frac{Q}{1+\ep\beta_\para} \ep\pth{\bm{\beta}_\perp \cdot \np\nu_\para} 
+    + \frac{t_0v_0}{a} \frac{1}{\ep q_0} \frac{Q}{1+\ep\beta_\para} \ep\pth{1+\ep\beta_\para} \p_Z\nu_\para
+    - \frac{t_0v_0}{a} \bm{\nu}_\perp \cdot \np q - \frac{t_0v_0}{a}\ep\nu_\para \p_Z q \nonumber\\
+    &= \ep\fr\bm{\beta}_\perp\cdot\np\nu_\para + \ep\pth{1+\ep q}\p_Z\nu_\para - \ep\pth{\bm{\nu}_\perp\cdot\np q + \ep\nu_\para\p_Z q} \\
+    &= \ep\fr\Braket{\nu_\para, \Phi} - \ep\fr\br{\nu_\para, \Psi} + \ep\pth{1+\ep q} \p_Z\nu_\para - \ep\Braket{q, \phi} + \ep\br{q, \psi} - \ep^2\nu_\para\p_Zq \\
+    &= - \ep^2\Braket{\nu_\para, \GN\p_Z\beta_\para} - \ep\br{\nu_\para, \Psi} - \ep q\br{\nu_\para, \Psi} + \ep\beta_\para\br{\nu_\para, \Psi} \\
+    &+ \ep\p_Z\nu_\para + \ep^2q\p_Z\nu_\para - \ep\br{q, \phi} + \ep\br{q, \psi} - \ep^2\nu_\para\p_Zq + O\pth{\ep^3}.
+\end{align}
+This has nothing at $O(1)$, but has $O(\ep)$
+\begin{align*}
+    - \ep\br{\nu_\para, \Psi} - \ep q\br{\nu_\para, \Psi} + \ep\beta_\para\br{\nu_\para, \Psi} + \ep\p_Z\nu_\para - \ep\br{q, \phi} + \ep\br{q, \psi}.
+\end{align*}
+At $O\pth{\ep^2}$,
+\begin{align*}
+    - \ep^2\Braket{\nu_\para, \GN\p_Z\beta_\para} + \ep^2q\p_Z\nu_\para - \ep^2\nu_\para\p_Zq.
+\end{align*}
+So on for higher orders.
+
+
+
+\section{New Fast-Slow System}
+Now we will again check if our system is fast-slow by sending $\ep\to0$ and seeing whether the limit system obeys the constraint \ref{constraint}.
+
+\subsection{Low-$\beta$ Scaling}
+In low-$\beta$ scaling ($M_0^2=1$, $\beta_0=\ep^2$), we appear to have $y=\pth{\phi,\beta_\para}$ and $x=\pth{\psi, \nu_\para, \Psi, q}$, as the limit system is
+\begin{align*}
+    \lap\p_\tau\phi = -\lap\beta_\para, && \p_\tau\beta_\para = -\lap\phi,
+\end{align*}
+with $\p_\tau x=0$. Because $\phi$ has Neumann boundary conditions, $\bm{n}\cdot\np\phi=0$, we also have that $\p_\tau\bm{n}\cdot\np\phi = \bm{n}\cdot\np\p_\tau\phi = 0$. Thus, we are permitted to use the Green's function outlined in the Appendix \ref{appendix} to write $\p_\tau\phi = \GN\lap\p_\tau\phi = -\GN\lap\beta_\para$. 
+
+The derivative of the limit system with respect to the fast variables is 
+\begin{align}
+    D_yf_0[\delta y] &= \pmat{0 & -\GN\lap \\ -\lap & 0} \bmat{\delta\phi \\ \delta\beta_\para} = \bmat{-\GN\lap\delta\beta_\para \\ -\lap\delta\phi} = \bmat{\delta\bar{\phi} \\ \delta\bar{\beta}_\para}, 
+\end{align}
+where $\delta\phi \in\mathcal{N}$. We are interested in whether the derivative is invertible, or only in/surjective. 
+\begin{proof} [Injectivity:]
+    A linear map is injective if and only if its kernel is $\{0\}$. The kernel of this operator consists of all $\delta y\in Y$ for whom $D_yf_0(x,y)[\delta y] = 0$, or 
+    \begin{align}
+    \bmat{-\GN\lap\delta\beta_\para \\ -\lap\delta\phi} &= 
+    \bmat{H^N_{\delta\beta_\para} - \delta\beta_\para \\ -\lap\delta\phi} = 
+    \bmat{0 \\ 0},
+    \end{align}
+    where $H^N_{\delta\beta_\para}\in\mathcal{N}$ is the unique harmonic function with the same Neumann boundary conditions as $\delta\beta_\para$. Because $\delta\phi\in\mathcal{N}$, we do have that $\delta\phi = \GN\lap\delta\phi = 0$. However any harmonic function $\delta\beta_\para$ satisfies $\delta\beta_\para = H^N_{\delta\beta_\para}$, so $\ker D_yf_0 = \Set{ \bmat{0 \\ \delta\beta_\para} | \lap \delta\beta_\para=0} \neq \{0\}$. Therefore, the map $D_yf_0$ is not injective. 
+\end{proof}
+However, it is surjective:
+\begin{proof} [Surjectivity:]
+    Given any $\delta\bar{y} \in Y$, there exists a $\delta y\in Y$ such that $D_yf_0[\delta y] = \delta\bar{y}$. For example, we find one particular solution by choosing $\delta\beta_\para\in\mathcal{N}$, so that  
+    \begin{align}
+    \bmat{H^N_{\delta\beta_\para} - \delta\beta_\para \\ -\lap\delta\phi} =& \bmat{-\delta\beta_\para \\ -\lap\delta\phi} =  \bmat{\delta\bar{\phi} \\ \delta\bar{\beta}_\para} \\ 
+    \Longrightarrow & \bmat{\delta\phi \\ \delta\beta_\para} = \bmat{-\GN \delta\bar{\beta}_\para \\ -\delta\bar{\phi}}. 
+    \end{align}
+\end{proof}
+Because $D_yf_0$ is actually a surjection, this system is weakly fast slow.
+
+
+\subsection{High-$\beta$ Scaling}
+In high-$\beta$ scaling ($M_0^2 = \ep$, $\beta_0=\ep$), the limit system is identical to that in low-$\beta$ scaling, and we find that the split $x=\pth{\psi,\nu_\para, \Psi, q}$ and $y=\pth{\phi,\beta_\para}$ is weakly fast-slow in exactly the same way.
+
+
+\subsection{Low-Flow Scaling}
+In the low-flow scaling, ($M_0^2=\ep^2$, $\beta_0=1$), the limit system changes: 
+\begin{align*}
+    \lap\p_\tau\phi = -\lap\pth{\pth{\pi'(1)+1}\beta_\para - \pi'(1)q}, && \p_\tau\beta_\para = -\lap\phi.
+\end{align*}
+Applying the Green's operator once more, we have $\p_\tau\phi = -\pth{\pi'(1)+1}\GN\lap\beta_\para + \pi'(1)\GN q$ and fast-slow split $y=\pth{\phi,\beta_\para}$, $x=\pth{\psi,\nu_\para, \Psi, q}$. The $q$ term is annihilated when we take $D_yf_0(x,y)$ and we get 
+\begin{align}
+    D_yf_0(x,y)[\delta y] = \pmat{0 & -[p'(1)+1] \GN \lap \\ -\lap & 0} \bmat{\delta \phi \\ \delta \beta_\para} = \bmat{-[p'(1)+1] \pth{\delta\beta_\para - H_{\delta\beta_\para}} \\ -\lap\delta\phi} = \bmat{\delta \bar{\phi} \\ \delta \bar{\beta}_\para}. 
+\end{align}
+\begin{proof} [Injectivity:]
+    This has the same non-trivial kernel as before, so it is not injective
+\end{proof}
+\begin{proof} [Surjectivity:]
+    However, we can still find solutions for any $\delta\bar{y}$, so it is surjective, and our system is weakly fast slow. For example, when $\delta\beta_\para\in\mathcal{N}$, we have 
+    \begin{align}
+    \bmat{\delta\phi \\ \delta\beta_\para} &= \bmat{-\GN \delta\bar{\beta}_\para \\ -\delta\bar{\phi} / [p'(1)+1]}.
+    \end{align}
+\end{proof}
+
+
+
+\section{Asymptotic Corrections} \label{asymptotic corrections}
+Our solution for the trajectory of the fast variables in the limit system describes dynamics on the slow manifold, $S_0$. We will now assume that the full solution depends smoothly on $\ep$ so that we can gradually deform $S_0$ into $S_\ep$. The corresponding dynamics on $S_\ep$ can be written as $y^*_\ep(x) = y^*_0(x) + \ep y^*_1(x) + \ep^2y^*_2(x) + \cdots$, and should satisfy the invariance equation: 
+\begin{align} \label{invariance}
+    \dot{y}_\ep^*(x) &= \ep Dy^*_\ep(x)[g_\ep(x,y^*_\ep(x))] = f_\ep(x,y^*_\ep(x)).
+\end{align}
+Note that we can Taylor expand each $f_k$ in $f_\ep = f_0 + \ep f_1 + \ep^2 f_2 + \cdots$ around $y_0^*$ to get
+\begin{align*} 
+    f_k(x,y_\ep^*) &= f_k(x,y_0^*) + D_yf_k(x,y_0^*)[y_\ep^*-y_0^*] + \frac{1}{2}D^2f_k(x,y_0^*)[y_\ep^*-y_0^*]^2 + \cdots \\ 
+    &= f_k(x,y_0^*) + \ep D_yf_k(x,y_0^*)[y_1^*+\ep y_2^*+\cdots] + \frac{1}{2}\ep^2 D^2f_k(x,y_0^*)[y_1^*+\ep y_2^*+\cdots]^2 + \cdots.
+\end{align*}
+The same applies to $g_\ep = g_0 + \ep g_1 + \ep^2 g_2 + \cdots$. 
+
+At $O(1)$, the invariance equation is just $0=f_0\pth{x,y^*_0(x)}$, which lets us solve for $y_0^*$. At $O(\ep)$,    
+\begin{align*}
+    Dy^*_0[g_0\pth{x,y_0^*}] = f_1(x,y_0^*) + D_yf_0(x,y_0^*)[y^*_1], \quad\text{or} \\ 
+    y_1^*(x) = [D_yf_0(x,y_0^*)]^{-1} \pth{Dy_0^*[g_0(x,y_0^*)] - f_1(x,y_0^*)}.  
+\end{align*}
+The second order correction $y_2^*$ is given by the second order contributions to the invariance equation: 
+\begin{align*}
+    Dy_1^*[g_0(x,y_0^*)] + Dy_0^*[g_1(x,y_0^*) + D_yg_0(x,y_0^*)[y_1^*]] &= f_2(x,y_0^*) + D_yf_1(x,y_0^*)[y_1^*] + D_yf_0(x,y_0^*)[y_2^*] \\ 
+    &+ \frac{1}{2}D^2f_0(x,y_0^*)[y_1^*]^2, \quad\text{or} 
+\end{align*}
+\begin{align*}
+    y_2^*(x) = [D_yf_0(x,y_0^*)]^{-1} & \biggl( Dy_1^*[g_0(x,y_0^*)] + Dy_0^*[g_1(x,y_0^*) + D_yg_0(x,y_0^*)[y_1^*]] \\ 
+    &- f_2(x,y_0^*) - D_yf_1(x,y_0^*)[y_1^*] - \frac{1}{2}D^2f_0(x,y_0^*)[y_1^*]^2 \biggr). 
+\end{align*}
+
+
+\subsection{Low-$\beta$ Scaling}
+We've already used the low-$\beta$ ($M_0^2=1$, $\beta_0=\ep^2$) limit system to solve for the zeroth order condition
+\begin{align}
+    f_0\pth{x,y^*_0(x)} &= \bmat{-\GN\lap\beta_{\para\,0}^* \\ -\lap\phi_0^*} = \bmat{0 \\ 0}.
+\end{align}
+Because $\phi_0^*\in\mathcal{N}$ already, we have $\phi_0^* = \GN\lap\phi_0^* = 0$. Any harmonic function satisfies $\GN\lap\beta_{\para\,0}^* = H_{\beta_{\para\,0}^*} - \beta_{\para\,0}^* = 0$, so we have 
+\begin{align} \label{y^*_0}
+    y_0^*(x) &= \Set{\bmat{0 \\ \beta_{\para\,0}^*(x)} | \lap\beta_{\para\,0}^*=0}.
+\end{align}
+
+Now we're going to find $y^*_1(x)$ using 
+\begin{align*}
+    D_yf_0(x,y_0^*)[y^*_1] = Dy^*_0[g_0\pth{x,y_0^*}] - f_1(x,y_0^*).
+\end{align*}
+$f_1(x,y_0)$ has the $O(\ep)$ contributions
+\begin{align*}
+    \lap\p_\tau\phi: &- \ep\Braket{\lap\Psi, \Psi} - \ep\pth{\lap\Psi}^2 - \ep\Braket{q,\beta_\para} - \ep q\lap\beta_\para - \ep\np\np\phi:\np\np\phi \\
+    &- \ep\Braket{\lap\phi, \phi} - \ep\lap\br{\psi,\phi} - \ep\np\np\psi:\np\np\psi + \ep\br{\lap\psi, \phi} + \ep\pth{\lap\psi}^2, \\
+    \p_\tau\beta_\para: &-\ep\br{\nu_\para, \Psi} - \ep\Braket{\beta_\para, \phi} + \ep\br{\beta_\para, \psi} - \ep\beta_\para\lap\phi.
+\end{align*}
+$f_1\pth{x,y_0^*}$ is given by inserting \eqref{y^*_0} into the above expressions. That is, by setting $\phi_0^* = \lap\beta_{\para\,0}^* = 0$.
+\begin{align*}
+    \lap\p_\tau\phi_0^*: &- \ep\Braket{\lap\Psi, \Psi} - \ep\pth{\lap\Psi}^2 - \ep\Braket{q,\beta_\para} - \ep\np\np\psi:\np\np\psi + \ep\pth{\lap\psi}^2, \\
+    \p_\tau\beta_{\para\,0}^*: &-\ep\br{\nu_\para, \Psi} + \ep\br{\beta_\para, \psi}.
+\end{align*}
+$g_0(x,y_0)$ has $O(\ep)$ contributions
+\begin{align*}
+    \lap\p_\tau\psi: &- \ep\br{\lap\Psi, \Psi} - \ep\br{q, \beta_\para} + \ep\lap\p_Z\Psi - \ep\Braket{\lap\psi, \phi} + \ep\br{\lap\psi, \psi} - \ep\lap\phi\lap\psi, \\
+    \p_\tau\nu_\para: &- \ep\Braket{\nu_\para, \phi} + \ep\br{\nu_\para, \psi} - \ep\br{\beta_\para, \Psi}, \\
+    \lap\p_\tau\Psi: &+ \ep\p_Z\lap\psi - \ep\lap\Braket{\phi, \Psi} - \ep\lap\br{\psi, \Psi}, \\
+    \p_\tau q: &- \ep\br{\nu_\para, \Psi} - \ep q\br{\nu_\para, \Psi} + \ep\beta_\para\br{\nu_\para, \Psi} + \ep\p_Z\nu_\para - \ep\br{q, \phi} + \ep\br{q, \psi}.
+\end{align*}
+$g_0(x,y^*_0)$ is given by inserting \eqref{y^*_0} into the above expressions.
+\begin{align*}
+    \lap\p_\tau\psi_0^*: &- \ep\br{\lap\Psi, \Psi} - \ep\br{q, \beta_\para} + \ep\lap\p_Z\Psi + \ep\br{\lap\psi, \psi}, \\
+    \p_\tau\nu_{\para\,0}^*: &+ \ep\br{\nu_\para, \psi} - \ep\br{\beta_\para, \Psi}, \\
+    \lap\p_\tau\Psi_0^*: &+ \ep\p_Z\lap\psi - \ep\lap\br{\psi, \Psi}, \\
+    \p_\tau q_0^*: &- \ep\br{\nu_\para, \Psi} - \ep q\br{\nu_\para, \Psi} + \ep\beta_\para\br{\nu_\para, \Psi} + \ep\p_Z\nu_\para + \ep\br{q, \psi}.
+\end{align*}
+Altogether,
+\begin{align*}
+D_yf_0(x,y_0^*)[y_1^*] &= Dy_0^*\br{g_0(x,y_0^*)} - f_1(x, y_0^*) \\
+&= \left( \begin{array}{l}
+    \multicolumn{1}{c}{0} \\
+    \p_\psi\beta_{\para\,0}^*\GD \pth{- \br{\lap\Psi, \Psi} - \br{q, \beta_\para} + \lap\p_Z\Psi + \br{\lap\psi, \psi}} \\
+    + \p_{\nu_\para}\beta_{\para\,0}^* \pth{\br{\nu_\para, \psi} - \br{\beta_\para, \Psi}}
+    + \p_\Psi\beta_{\para\,0}^*\GD \pth{\p_Z\lap\psi - \lap\br{\psi, \Psi}} \\
+    + \p_q\beta_{\para\,0}^* \pth{- \br{\nu_\para, \Psi} -  q\br{\nu_\para, \Psi} + \beta_\para\br{\nu_\para, \Psi} + \p_Z\nu_\para + \br{q, \psi}}
+\end{array} \right) \\
+&+ \pmat{\GN\pth{\Braket{\lap\Psi, \Psi} + \pth{\lap\Psi}^2 + \Braket{q,\beta_\para} + \np\np\psi:\np\np\psi - \pth{\lap\psi}^2} \\
+\br{\nu_\para, \Psi} - \br{\beta_\para, \psi}}
+\end{align*}
+or,
+\begin{align}
+    y_1^* &= \pmat{ \\ }
+\end{align}
+
+
+
+
+
+
+\subsection{High-$\beta$ Scaling}
+
+$f_1(x,y_0)$ has the $O(\ep)$ contributions 
+\begin{align*}
+    \lap \p_T\phi &= - \np\np\phi:\np\np\phi - \Braket{\lap\phi, \phi} - \lap\br{\psi,\phi} - \np\np\psi:\np\np\psi + \br{\lap\psi, \phi} + \pth{\lap\psi}^2 \\
+        &+ \left|\np\beta_\para\right|^2 - \Braket{q,\beta_\para} + P'\pth{\frinv} \lap\beta_\para - P'\pth{\frinv} \lap q \\ 
+        &+\beta_\para\lap\beta_\para - q\lap\beta_\para - \frac{1}{2}\lap \beta_\para^2 - \frac{1}{2}\lap |\bm{\beta}_\perp|^2 \\ 
+        &+ \lap\p_Z\Phi + \np\np\Phi:\np\np\Phi + \Braket{\lap\Phi, \Phi} + \lap\br{\Psi,\Phi} \\ 
+        &+ \np\np\Psi:\np\np\Psi - \br{\lap\Psi, \Phi} - \pth{\lap\Psi}^2, \quad\text{and} \\ 
+    \p_T\beta_\para &= \Braket{\nu_\para, \Phi} - \br{\nu_\para, \Psi} - \Braket{\beta_\para, \phi} + \br{\beta_\para, \psi} - \beta_\para\lap\phi. 
+\end{align*}
+$f_1(x,y_0^*)$ is given by inserting \eqref{y^*_0} into the above expression. That is, by setting $\phi^*_0 = \lap\beta_{\para\,0}^* = 0$: 
+\begin{align*}
+    \lap \p_T\phi_0^* &= - \np\np\psi:\np\np\psi + \pth{\lap\psi}^2 \\ 
+        &+ |\np\beta_{\para\,0}^*|^2 - \Braket{q,\beta_{\para\,0}^*} - P'\pth{\frinv} \lap q \\ 
+        &- \frac{1}{2}\lap \beta_{\para\,0}^{*\,2} - \frac{1}{2}\lap |\bm{\beta}_\perp|^2 \\ 
+        &+ \lap\p_Z\Phi + \np\np\Phi:\np\np\Phi + \Braket{\lap\Phi, \Phi} + \lap\br{\Psi,\Phi} \\ 
+        &+ \np\np\Psi:\np\np\Psi - \br{\lap\Psi, \Phi} - \pth{\lap\Psi}^2, \quad \text{and} \\
+    \p_T\beta_{\para\,0}^* &= 
+    \Braket{\nu_\para, \Phi} - \br{\nu_\para, \Psi} + \br{\beta_{\para\,0}^*, \psi}. 
+\end{align*}
+$\p_T\phi^*_0\in\mathcal{N}$ still has homogeneous Neumann boundary conditions, so 
+
+$O(\ep)$ contributions to $g_0(x,y)$ are 
+\begin{align*}
+    \lap\p_T\psi &= - \Braket{\lap\psi, \phi} + \br{\lap\psi, \psi} - \lap\phi\lap\psi - \br{q,\beta_\para} + \lap\p_Z\Psi \\ 
+        &+ \Braket{\lap\Psi, \Phi} - \br{\lap\Psi, \Psi} + \lap\Phi\lap\Psi, \\ 
+    \p_T\nu_\para &= - \Braket{\nu_\para, \phi} + \br{\nu_\para, \psi} - \p_Z\beta_\para + \p_Z\beta_\para + \Braket{\beta_\para,\Phi} -\br{\beta_\para, \Psi}, \\ 
+    \lap \p_T\Phi &= \lap \p_Z\phi, \\ 
+    \lap \p_T\Psi &= - \lap\pth{\Braket{\phi, \Psi} - \Braket{\psi, \Phi} + \br{\phi, \Phi} + \br{\psi, \Psi} - \p_Z\psi}, \quad\text{and} \\ 
+    \p_Tq &= \Braket{\nu_\para, \Phi} - \br{\nu_\para, \Psi} - \Braket{q, \phi} + \br{q, \psi}, \text{\color{blue}good}
+\end{align*}
+which greatly simplify for $g_0(x,y_0^*(x))$: 
+\begin{align*}
+    \bmat{\p_T\psi \\ \p_T\nu_\para \\ \p_T\Phi \\ \p_T\Psi \\ \p_Tq} 
+    &= \bmat{\p_Z\Psi + \GD\pth{ \br{\lap\psi, \psi} - \br{q,\beta_{\para\,0}^*} + \Braket{\lap\Psi, \Phi} - \br{\lap\Psi, \Psi} + \lap\Phi\lap\Psi} \\ 
+    \br{\nu_\para, \psi} + \Braket{\beta_{\para\,0}^*,\Phi} - \br{\beta_{\para\,0}^*, \Psi} \\ 
+    0 \\ 
+    \p_Z\psi + \GD\lap\pth{\Braket{\psi, \Phi} - \br{\psi, \Psi}} \\ 
+    \Braket{\nu_\para, \Phi} - \br{\nu_\para, \Psi} + \br{q, \psi}}, \text{\color{blue}good}
+\end{align*}
+***These can be simplified with the $\Braket{} \pm \br{}$ identities I have. 
+
+Hey, notice $\br{\phi,\Phi}\in\mathcal{D}$, so that $\GD\lap\br{\phi,\Phi} = \br{\phi,\Phi}$. Proof: 
+\begin{align*}
+    \br{\phi,\Phi}\bm{n} &= \bm{e}_Z\times \br{\bm{n}\times \pth{\np\phi\times\np\Phi}} + \cancel{\pth{\bm{e}_Z\cdot\bm{n}}} \pth{\np\phi\times\np\Phi} \\ 
+    &= \bm{e}_Z\times \br{\pth{\bm{n}\cdot\np\Phi}\np\phi - \pth{\bm{n}\cdot\np\phi}\np\Phi} = 0 \quad\text{on}\quad \p D. 
+\end{align*}
+I still can't figure out whether something similar works for $\Braket{\phi,\Phi}$, or for different entries. 
+
+\subsection{Low-Flow Scaling}
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.19)  29 DEC 2024 02:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.19)  18 JAN 2025 22:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -585,7 +585,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [6]
 
 [7]
-Overfull \hbox (11.363pt too wide) in paragraph at lines 348--349
+Overfull \hbox (11.363pt too wide) in paragraph at lines 350--351
 []\OT1/cmr/m/n/10 In our case, $\OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; y\OT1/cmr/m/n/10 ) = \OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 r[] ^^A \OML/cmm/b/it/10 ^^W[]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 r[] [] \OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 r[] ^^A \OML/cmm/b/it/10 ^^W[]\OT1/cmr/m/n/10 )$ is only $= 0$ when $\OMS/cmsy/m/n/10 r[] ^^A \OML/cmm/b/it/10 ^^W[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 r[] [] \OT1/cmr/m/n/10 =
  []
 
@@ -604,7 +604,7 @@ Overfull \hbox (11.363pt too wide) in paragraph at lines 348--349
 [13]
 
 [14]
-Overfull \hbox (5.19754pt too wide) detected at line 626
+Overfull \hbox (5.19754pt too wide) detected at line 628
 []
  []
 
@@ -629,7 +629,7 @@ Overfull \hbox (5.19754pt too wide) detected at line 626
 [23]
 
 [24]
-Overfull \hbox (7.16266pt too wide) in paragraph at lines 1142--1145
+Overfull \hbox (7.16266pt too wide) in paragraph at lines 1144--1147
 \OT1/cmr/m/n/10 disk-with-radius-a https://math.stackexchange.com/questions/2571025/property-of-the-greens-function?rq=1 
  []
 
@@ -644,7 +644,7 @@ Overfull \hbox (7.16266pt too wide) in paragraph at lines 1142--1145
 [28]
 
 [29]
-Overfull \hbox (53.96951pt too wide) detected at line 1332
+Overfull \hbox (53.96951pt too wide) detected at line 1334
 []
  []
 
@@ -670,13 +670,13 @@ Package logreq Info: Writing requests to 'Notes.run.xml'.
 Here is how much of TeX's memory you used:
  12710 strings out of 473650
  230842 string characters out of 5717934
- 1086404 words of memory out of 5000000
+ 1086397 words of memory out of 5000000
  35657 multiletter control sequences out of 15000+600000
  573747 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,23n,81p,1306b,801s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib5.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam7.pfb><C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Notes.pdf (34 pages, 449839 bytes).
+Output written on Notes.pdf (34 pages, 450237 bytes).
 PDF statistics:
  236 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

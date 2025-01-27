@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[backend=biber,style=phys]{biblatex}
+\addbibresource{references.bib}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, mathtools, braket, cancel, bm, xcolor}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\newcommand{\para}{\parallel}
+\newcommand{\lam}{\lambda}
+\newcommand{\om}{\omega}
+\newcommand{\gam}{\gamma}
+\newcommand{\ep}{\epsilon}
+\newcommand{\np}{\nabla_\perp}
+\newcommand{\apo}{\ ^{\prime} \!}
+\newcommand{\p}{\partial}
+\newcommand{\ext}{\mathop{}\!\mathrm{d}}
+\newcommand{\til}[1]{\widetilde{ #1 }}
+\newcommand{\deriv}[2]{\frac{\p #1}{\p #2}}
+\newcommand{\st}{\sin\theta}
+\newcommand{\ct}{\cos\theta}
+\newcommand{\sphi}{\sin\phi}
+\newcommand{\cphi}{\cos\phi}
+\newcommand{\fr}{\frac{1+\ep q}{1+\ep\beta_\para}}
+\newcommand{\frinv}{\frac{1+\ep\beta_\para}{1+\ep q}}
+
+\newcommand{\pth} [1] {\left( #1 \right) }
+\newcommand{\br} [1] {\left[ #1 \right] }
+\newcommand{\bmat} [1] {\begin{bmatrix} #1 \end{bmatrix}}
+\newcommand{\pmat} [1] {\begin{pmatrix} #1 \end{pmatrix}}
+
+
+
+
+\title{Functional Derivatives}
+\author{Finny Valorz}
+\begin{document}
+\maketitle
+
+I have $n_e(x) = n_e(n_i(x), E(x)) = Z_in_i(x) + b\nabla\cdot \bm{E}(x)$ and some functional $F[n_e(n_i,\bm{E})]$. The differential of $F$ 
+\begin{align*}
+    \delta F &= F[n_e+\delta n_e] - F[n_e] = \int dx\, \frac{\delta F[n_e]}{\delta n_e} \delta n_e 
+\end{align*}
+lets me find $\frac{\delta F[n_e]}{\delta n_e}$. Wikipedia gives chain rules
+\begin{align*}
+    \frac{\delta F[n_e]}{\delta n_i} &= \frac{\delta F[n_e]}{\delta n_e} \deriv{n_e}{n_i}, \\ 
+    \frac{\delta F[n_e]}{\delta \bm{E}} &= \frac{\delta F[n_e]}{\delta n_e} \deriv{n_e}{\bm{E}}, 
+\end{align*} 
+where 
+\begin{align*}
+    \deriv{n_e}{n_i} &= Z_i, \\
+    \deriv{n_e}{\bm{E}} &= \bm{E}\cdot\nabla n_e = \text{just gross vector calc stuff}. 
+\end{align*}
+These are chain rules for when $n_e$ is just a function of other functions ($\nabla\cdot$ is just a differential operator between function spaces). Wikipedia has another chain rule for $\frac{\delta F[G[\rho]]}{\delta\rho}$. $G$ is a functional that turns $\rho$ into a number (by integrating). 
+
+Example if $N[n_e] = \int dx\,n_e(x)$:
+\begin{align*}
+    \delta N = \int dx\,\frac{\delta N[n_e]}{\delta n_e} \delta n_e 
+    &= N[n_e + \delta n_e] - N[n_e] = \int dx\,\delta n_e \Longrightarrow \frac{\delta N[n_e]}{\delta n_e} = 1. 
+\end{align*}
+\begin{align*}
+    \frac{\delta N[n_e]}{\delta n_i} &= Z_i, \\ 
+    \frac{\delta N[n_e]}{\delta\bm{E}} &= \bm{E}\cdot\nabla n_e. 
+\end{align*}
+\hrulefill
+
+
+I think the chain rules have to be the way they are so that we get  
+\begin{align*}
+    \delta F &= \int dx\,\frac{\delta F[n_e]}{\delta n_e} \delta n_e \\ 
+    &= \int dx\,\frac{\delta F}{\delta n_e} \left[ \deriv{n_e}{n_i}\delta n_i + \deriv{n_e}{\bm{E}}\cdot\delta\bm{E} \right] \\ 
+    &= \int dx\,\left[ \frac{\delta F[n_e]}{\delta n_i} \delta n_i + \frac{\delta F[n_e]}{\delta\bm{E}}\cdot\delta\bm{E}\right] \\ 
+    &= F[n_e(n_i+\delta n_i, \bm{E}+\delta\bm{E})] - F[n_e(n_i,\bm{E})]. 
+\end{align*}
+in analogy with 
+\begin{align*}
+    dn_e &= \deriv{n_e}{n_i} dn_i + \deriv{n_e}{\bm{E}}\cdot d\bm{E}.
+\end{align*}
+\hrulefill
+
+
+Each component of the divergence in $\deriv{n_e}{\bm{E}}$ looks like $\deriv{}{E_i} \p_jE_j = d(\p_jE_j) \pth{\deriv{}{E_i}}$. We have $dE_i = \p_jE_idx_j$ and $d(\p_jE_j) = \p_k\p_jE_jdx_k$, as well as 
+\begin{align*}
+    \deriv{}{E_i} = \deriv{x_j}{E_i} \deriv{}{x_j}.
+\end{align*}
+Together, this should be 
+\begin{align*}
+    d(\p_jE_j)\pth{\deriv{}{E_i}} &= \p_k\p_jE_j \deriv{x_l}{E_i} \delta_{lk} = \p_k\p_jE_j \deriv{x_k}{E_i}. 
+\end{align*}
+If each $E_i:\mathbb{R}^3\to\mathbb{R}$ is a bijection, then $\bm{E}^{-1}_i \pth{E_i(\bm{x})} = \bm{x}$, and  
+\begin{align*}
+    \bm{e}_y \cdot \p_y\bm{x} &= 1 = \bm{e}_y\cdot\p_y \bm{E}_i^{-1}\pth{E_i(\bm{x})} = \deriv{y}{E_i}\deriv{E_i}{y}.
+\end{align*}
+Idk how to generalize this to E field not being bijective. Then 
+\begin{align*}
+    \left[ \deriv{}{\bm{E}} \nabla\cdot\bm{E} \right]_i &= \deriv{}{E_i} \p_jE_j = \frac{\p_k\p_jE_j}{\p_kE_i} = \left[ \deriv{\bm{x}}{\bm{E}} \cdot \nabla\pth{\nabla\cdot\bm{E}} \right]_i. 
+\end{align*}
+\hrulefill
+
+
+Nope, actually I think this is how it should work:
+\begin{align*}
+    dn_e = \deriv{n_e}{n_i}dn_i + \deriv{n_e}{\bm{E}}\cdot d\bm{E} &= n_e(n_i+dn_i, \bm{E}+d\bm{E}) - n_e(n_i,\bm{E}) \\ 
+    &= Z_i\pth{n_i+dn_i} + b\nabla\cdot\pth{\bm{E}+d\bm{E}} - Z_in_i - b\nabla\cdot\bm{E} \\ 
+    &= Z_idn_i + b\nabla\cdot d\bm{E},
+\end{align*}
+so $\deriv{n_e}{n_i} = Z_i$ and $\deriv{n_e}{\bm{E}}= b\nabla$.
+
+\end{document}
+

@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber Notes"] 1735342471.7701 "Notes.bcf" "Notes.bbl" "Notes" 1737262710.18808 0
-  "Notes.bcf" 1737262709 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
+["biber Notes"] 1735342471.7701 "Notes.bcf" "Notes.bbl" "Notes" 1737976279.98886 0
+  "Notes.bcf" 1737976279 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
   (generated)
   "Notes.bbl"
   "Notes.blg"
   (rewritten before read)
-["pdflatex"] 1737262707.51831 "c:/Users/finny/Documents/GitHub/Research-Plasma/Notes/Notes.tex" "Notes.pdf" "Notes" 1737262710.18944 0
+["pdflatex"] 1737976277.07686 "c:/Users/finny/Documents/GitHub/Research-Plasma/Notes/Notes.tex" "Notes.pdf" "Notes" 1737976279.99044 0
   "C:/Users/finny/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1737060912 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/finny/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1734661889 11988995 2335b61cda65250248dffdc31f3e4ab0 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1233951848 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -131,11 +131,11 @@
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1730400552 10214 61188260d324e94bc2f66825d7d3fdf4 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Notes.aux" 1737262709 8324 b42f6161dd804e329ce96749ec1ce0ef "pdflatex"
+  "Notes.aux" 1737976279 8454 76e6ac555193fe61fe7f2a8e3cfa5528 "pdflatex"
   "Notes.bbl" 1735342474 486 76d65a242ec496c9b4361af646ff12cb "biber Notes"
-  "Notes.run.xml" 1737262709 2437 914749508416f54f42154fed58aa8ed2 "pdflatex"
-  "Notes.tex" 1737262706 117457 34c1edd8adc08edd7615d6aa6a28a8b7 ""
-  "c:/Users/finny/Documents/GitHub/Research-Plasma/Notes/Notes.tex" 1737262706 117457 34c1edd8adc08edd7615d6aa6a28a8b7 ""
+  "Notes.run.xml" 1737976279 2437 914749508416f54f42154fed58aa8ed2 "pdflatex"
+  "Notes.tex" 1737976275 119404 f77f6d923b27b57d437317780a19aaaa ""
+  "c:/Users/finny/Documents/GitHub/Research-Plasma/Notes/Notes.tex" 1737976275 119404 f77f6d923b27b57d437317780a19aaaa ""
   (generated)
   "Notes.aux"
   "Notes.bcf"

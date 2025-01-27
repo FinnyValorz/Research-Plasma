@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber Manuscript"] 1737369966.3878 "Manuscript.bcf" "Manuscript.bbl" "Manuscript" 1737371779.22781 0
+["biber Manuscript"] 1737369966.3878 "Manuscript.bcf" "Manuscript.bbl" "Manuscript" 1737976401.83636 0
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/bibtex/bib/feupphdteses/references.bib" 1366811700 2206 985e03fb36d872d306e76cfacc160693 ""
-  "Manuscript.bcf" 1737371778 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
+  "Manuscript.bcf" 1737976401 107805 0380cd8ba030a9b3b27519c651fac78a "pdflatex"
   (generated)
   "Manuscript.bbl"
   "Manuscript.blg"
   (rewritten before read)
-["pdflatex"] 1737371776.52052 "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" "Manuscript.pdf" "Manuscript" 1737371779.22941 0
+["pdflatex"] 1737976399.36707 "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" "Manuscript.pdf" "Manuscript" 1737976401.83784 0
   "C:/Users/finny/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1737060912 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/finny/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1734661889 11988995 2335b61cda65250248dffdc31f3e4ab0 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1233951848 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -130,11 +130,11 @@
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1730400552 7532 d2e1111e17bfebb1607d8ffa779705ec ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/finny/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Manuscript.aux" 1737371778 3991 bc9c4c88063ea5c830d9d7120cb480b3 "pdflatex"
+  "Manuscript.aux" 1737976401 3991 bc9c4c88063ea5c830d9d7120cb480b3 "pdflatex"
   "Manuscript.bbl" 1737369969 0 d41d8cd98f00b204e9800998ecf8427e "biber Manuscript"
-  "Manuscript.run.xml" 1737371778 2472 c8ce6cec3fc1898b5a0cc2ca3f7bab94 "pdflatex"
-  "Manuscript.tex" 1737371775 51190 5aadcff42eeb2d6f2ce5ae541b08b544 ""
-  "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" 1737371775 51190 5aadcff42eeb2d6f2ce5ae541b08b544 ""
+  "Manuscript.run.xml" 1737976401 2472 c8ce6cec3fc1898b5a0cc2ca3f7bab94 "pdflatex"
+  "Manuscript.tex" 1737976398 51539 f44d2b89fffa8ce0fea7ad57faebf41f ""
+  "c:/Users/finny/Documents/GitHub/Research-Plasma/Manuscript/Manuscript.tex" 1737976398 51539 f44d2b89fffa8ce0fea7ad57faebf41f ""
   (generated)
   "Manuscript.aux"
   "Manuscript.bcf"

@@ -1054,7 +1054,7 @@ Go find the weird conserved quantity in Morrison's paper, in terms of variables 
 \end{proof}
 
 \begin{lemma} \label{Homo Harmonic}
-    The unique harmonic function with h BCs is $f=0$. 
+    The unique harmonic function on the disc with h BCs is $f=0$. 
 \end{lemma}
 \begin{proof}
     General form for harmonic function on disc is 
@@ -1102,7 +1102,7 @@ $\GN$ is linear: It is the inverse of a linear operator (Restriction of $\lap$ t
 $\GD$ and $\GN$ commute with $\p_Z$. Proof: $\GD\p_Zs=\GD\p_Z\lap f = \GD\lap\p_Zf = \p_Zf = \p_Z\GD s$. Note, this is only okay to say, because in order for $f\in\mathcal{D}$, we have to have $f=0$ on $\p D$ for every disc, or more generally, $f=0$ on $\p Q$. This means changing from one disc to another does not change $f$: $\p_Zf=0$ on $\p Q$. 
 
 \begin{definition}
-    Define $H^D_g$ and $H^N_g$ as the unique harmonic functions with the same Dirichlet and Neumann boundary data as $g$ respectively. That is, $\lap H^D_g \lap H^N_g = 0$,  
+    Define $H^D_g$ and $H^N_g$ as the unique harmonic functions with the same Dirichlet and Neumann boundary data as $g$ respectively. That is, $\lap H^D_g = \lap H^N_g = 0$,  
     \begin{align}
         H^D_g = g \quad\text{and}\quad \bm{n}\cdot\np H^N_g = \bm{n}\cdot\np g \quad\text{on}\quad \p D, \quad\text{and}\quad &&  \iint_D H^N_g\ dxdy = \iint_D g\ dxdy. 
     \end{align}
@@ -1146,14 +1146,26 @@ https://math.stackexchange.com/questions/2538616/2d-greens-function-on-a-disk-wi
 https://math.stackexchange.com/questions/2571025/property-of-the-greens-function?rq=1 
 
 
+\subsection{Compatibility Conditions/Regularity}
+We have been using $\GN:L^2(D)\to\mathcal{N}(D)$ to find $f$ from $s = \lap f$ with the requirement that $\iint_D s\ dA = 0$ from Lemma \ref{Neumann Problem}. So really, we mean $\GN:\mathcal{F}\to\mathcal{N}$, where $s\in\mathcal{F}\subset L^2(D)$ if and only if $\iint_D s\ dA = \int_{\p D} \np f\cdot\bm{n}\ dl = 0$.
+
+For $\lap\phi = \np\cdot\bm{\nu}_\perp$, this works because we have the boundary condition $\bm{v}\cdot\bm{n} = 0$ on $\p Q$, or $\bm{v}_\perp\cdot\bm{n}_\perp = 0$ on $\p D$: $\iint_D \np\cdot\bm{\nu}_\perp\ dA = \int_{\p D} \bm{\nu}_\perp\cdot\bm{n}_\perp\ dl = 0$, so $s\in\mathcal{F}$.
+
+When inverting $\lap\p_\tau\phi = \np\cdot\p_\tau\bm{\nu}_\perp$, we instead require $\iint_Q \np\cdot\p_\tau\bm{\nu}_\perp\,dA = \int_{\p Q} \p_\tau\bm{\nu}_\perp\cdot\bm{n}_\perp\,dl = 0$. If $\bm{\nu}_\perp(t)\in C^\infty$ varies smoothly with time, we may take $\p_\tau\pth{\bm{\nu_\perp}\cdot\bm{n}_\perp} = \p_\tau\bm{\nu}_\perp\cdot\bm{n}_\perp = 0$. If $\bm{\nu}_\perp$ does not have some notion of ``regularity'' in time however, this is not necessarily the case, and $\np\cdot\p_\tau\bm{\nu}_\perp$ may not $\in\mathcal{F}$. This distinction becomes clear when we consider that our expression for $\p_\tau\bm{\nu}_\perp$ in \eqref{nuperpevolution}; setting $\p_\tau\bm{\nu}_\perp\cdot\bm{n}_\perp = 0$ seems to imply additional conditions on $\beta_\para$, $\bm{\beta}_\perp$, $\bm{\nu}_\perp$, and $\pi$. Thus $\p_\tau s\in\mathcal{F}$, only follows from $s\in\mathcal{F}$ if $s$ obeys the above ``compatibility condition.''
+
 \subsection{Boundary Conditions for $\beta_\para$}
-Divergence theorem argument: Consider a flux tube going from $z_1$ to $z_2$. Because $\nabla\cdot\bm{B}=0$,  
-$$\iiint_V \pth{\nabla\cdot \bm{B}} dV = \iint_{\p V} \pth{\bm{B}\cdot \bm{n}} dA = 0.$$
+Divergence theorem argument: Consider a flux tube $T\subset Q$ going from $Z_1$ to $Z_2$. Because $\nabla\cdot\bm{B}=0$,  
+\begin{align*}
+\iiint_T \pth{\nabla\cdot \bm{B}} dV = \iint_{\p T} \pth{\bm{B}\cdot \bm{n}} dA = 0.
+\end{align*}
 However, we specifically have the boundary condition that $\bm{B}\cdot\bm{n}=0$ on $\p Q$, so we only need to consider contributions from the poloidal discs. Then the resulting integral becomes 
-$$\iint_D B_z(x,y,z_2)dxdy = \iint_D B_z(x,y,z_1) dxdy.$$
-Thus, we are free to set $B_z(x,y,z) = B_z(x,y) = B_0 \pth{1 + \ep\beta_\para(x,y)}$, where only $B_0$ contributes to the total flux. That is,  
-$$\iint_D B_zdxdy = B_0A + \ep B_0\iint_D \beta_\para(x,y)dxdy = B_0A.$$
-This shows we can choose $\beta_\para(x,y)$ to have boundary conditions where $\iint_D \beta_\para\ dxdy = 0$.  
+\begin{align*}
+\iint_D B_z\pth{X,Y,Z_2}\,dA = \iint_D B_z\pth{X,Y,Z_1}\,dA
+\end{align*}
+for arbitrary $Z_1$ and $Z_2$, which implies $\iint_D \p_ZB_z\,dA = 0$. When we set $B_z = B_0\pth{1+ \ep \beta_\para}$, this condition becomes $\iint_D \p_Z\beta_\para\,dA=0$. This is necessary when we try to invert $\lap\Phi = -\ep\p_Z\beta_\para$, which requires $\p_Z\beta_\para\in\mathcal{F}$.
+
+$\beta_\para$ has a poloidal average, $\bar{\beta}_\para = \frac{1}{A}\iint_D \beta_\para\,dA$.
+This lets us decompose $\beta_\para\pth{X,Y,Z} = \bar{\beta}_\para\pth{Z} + \til{\beta}_\para\pth{X,Y,Z}$, where $\til{\beta}_\para\in\mathcal{F}$ obeys $\iint_D \til{\beta}_\para\,dA = 0$ (this is because $= \iint_D \beta_\para\,dA - \iint_D \bar{\beta}_\para\pth{Z}\,dA = \bar{\beta}_\para A - \bar{\beta}_\para A = 0$). Then, the condition above becomes $\p_Z\bar{\beta}_\para = \frac{1}{A}\iint_D \p_Z\beta_\para\,dA = 0$, implying that $\bar{\beta}_\para\pth{Z}=$ constant, so $\iint_D \p_Z\beta_\para\,dA = \iint_D \p_Z\til{\beta}_\para\,dA=0$.
 
 Definition of current is $\bm{J} = \sum_\sigma q_\sigma n_\sigma \bm{v}_\sigma$. This makes it look like $\bm{v}\cdot\bm{n}=0$ on $\p Q$ might imply that $\bm{J}\cdot\bm{n}=0$. However, $\bm{v}$ is the mass-weighted center of mass velocity $\bm{v}= \frac{1}{\rho} \sum_\sigma m_\sigma n_\sigma \bm{v}_\sigma$ which mostly aligns with the ion velocity. If we do assume that $\bm{J}\cdot\bm{n}=0$, then Ampere's law (low-freq version for MHD excludes $\p_t \bm{E}$ term) is $\mu_0 \bm{J} = \nabla\times\bm{B}$. Refer to section 3.3 on Faraday's Law to expand the following.  
 \begin{align*}
@@ -1462,8 +1474,6 @@ When ep small, we see small variations in B. When ep=1 (geometric limit), we get
 (Note, choice of $B_0$ comes from divergence theorem argument above). 
 
 Should I define fss earlier in paper or later? This changes whether I write 3 with condensed or expanded equations. Do I want reader to know ``I'm showing that MHD is wfss," or that ``MHD has this cool dimensional reduction, which I achieve using wfss." 
-
-Assume solutions are all smooth $C^\infty$ in time/``regular." Then eg. deriv of $v\cdot n=v_\perp\cdot n=0$ is $\p_t v\cdot n=0$ which is technically another boundary condition (we have an expression for $\p_t v=$, but no reason to believe a priori that it is $=0$, so this is assumed). This is required when I try to pull $\lap$ off of $\lap\p_t\phi = \np\cdot\p_tv_\perp$. Lemma 1 says existence of solutions to this Poisson equation $\lap f=s$ require $\iint_D s\ dxdy=0 = \oint_{\p D} n\cdot\np f\ dl =0$. In this case, solutions require $\iint_D \np\cdot\p_t v_\perp\ dxdy = \oint_{\p D} (\p_tv_\perp \cdot n)\ dl =0$, which holds if $v\in C^\infty$ so that we can take $\p_t (v_\perp \cdot n) = 0$. 
 
 Wait but if $v_\perp=\np\phi + e_z\times\np\psi$, we actually have $\oint (\p_tv_\perp - e_z\times\np\psi) \cdot n\ dl =0$. First bit is already implied, so this means we need $\oint_{\p D} (e_z\times\np\psi)\cdot\ n\ dl= e_z\cdot \oint_{\p D} (\np\psi\times n)\ dl =0$. 
 
